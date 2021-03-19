@@ -22,7 +22,6 @@ const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
-console.log("process.env.VUE_APP_BASE_URL", process.env.VUE_APP_BASE_URL);
 const router = new VueRouter({
   base: window.__POWERED_BY_QIANKUN__ ? `${process.env.VUE_APP_BASE_URL}` : "/",
   mode: "history",

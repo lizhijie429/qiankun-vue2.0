@@ -3,18 +3,19 @@ import store from "@/store";
 import { initGlobalState } from "qiankun";
 
 let initialState = Vue.observable({
-  user: {}, // 当前登录用户
+  userInfo: {}, // 当前登录用户
+  globalConfig: {},
 });
 
 // 初始化state
 const actions = initGlobalState(initialState);
 
-actions.onGlobalStateChange((state, prev) => {
+actions.onGlobalStateChange((newValue, oldValue) => {
   // state: 变更后的状态; prev 变更前的状态
-  console.log("state: 变更后的状态", state);
-  console.log("prev: 变更后的状态", prev);
-  for (let key in state) {
-    initialState[key] = state[key];
+  console.log("state: 变更后的状态", newValue);
+  console.log("prev: 变更后的状态", oldValue);
+  for (let key in newValue) {
+    initialState[key] = newValue[key];
   }
 });
 

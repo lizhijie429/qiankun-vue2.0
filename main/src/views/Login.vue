@@ -8,5 +8,9 @@
 <script>
 export default {
   name: "Login",
+  mounted() {
+    console.log("this.$actions", this.$actions);
+    this.$actions.setGlobalState({ user: { name: "lizhijie" } });
+  },
 };
 </script>

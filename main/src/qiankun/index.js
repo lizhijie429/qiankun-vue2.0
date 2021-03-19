@@ -7,7 +7,7 @@ import {
 } from "qiankun";
 
 import microApps from "./app.js";
-import props from "./share";
+import { props } from "./share";
 
 function filterApps() {
   microApps.forEach((item) => {
@@ -17,7 +17,28 @@ function filterApps() {
 }
 
 const _microApps = filterApps();
-registerMicroApps(_microApps);
+registerMicroApps(_microApps, {
+  beforeLoad: [
+    (loadApp) => {
+      console.log("before load", loadApp);
+    },
+  ],
+  beforeMount: [
+    (mountApp) => {
+      console.log("before mount", mountApp);
+    },
+  ],
+  afterMount: [
+    (mountApp) => {
+      console.log("before mount", mountApp);
+    },
+  ],
+  afterUnmount: [
+    (unloadApp) => {
+      console.log("after unload", unloadApp);
+    },
+  ],
+});
 // 设置默认子应用,与 genActiveRule中的参数保持一致
 setDefaultMountApp("sub01");
 // 第一个微应用 mount 后需要调用的方法，比如开启一些监控或者埋点脚本。
