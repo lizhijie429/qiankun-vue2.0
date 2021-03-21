@@ -1,25 +1,40 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
+import store from "../store/index";
+import Layout from "@/views/Layout";
 
 Vue.use(VueRouter);
 
-const routes = [
+const importFile = (fileName) => () => import(/* webpackChunkName: "main" */ `../views/${fileName}.vue`);
+
+// 路由白名单(无需嵌套上左右整体布局)
+const globalRoutes = [
   {
     path: "/login",
-    name: "Login",
-    component: Login,
+    name: "login",
+    component: importFile("Login"),
+    meta: { isTabs: false, isSide: false, isMain: true },
   },
+];
+
+// 路由
+let pagesRouter = [
   {
-    path: "/home",
-    name: "Home",
-    component: () => import(/* webpackChunkName: "about" */ "../views/Home.vue"),
+    path: "/",
+    name: "layout",
+    component: Layout,
+    redirect: process.env.VUE_APP_DEFAULT_APP,
+    // redirect: "home",
+    children: [
+      {
+        path: "/home",
+        name: "home",
+        component: importFile("Home"),
+        meta: { isTabs: true, isSide: true, isMain: true },
+      },
+    ],
   },
-  {
-    path: "/404",
-    name: "404",
-    component: () => import(/* webpackChunkName: "about" */ "../views/404.vue"),
-  },
+  ...globalRoutes,
 ];
 
 // 处理重复点击同一个路由报错的问题
@@ -30,19 +45,48 @@ VueRouter.prototype.push = function push(location) {
 
 const router = new VueRouter({
   mode: "history",
-  routes,
+  routes: pagesRouter,
+  isAddAsyncMenuData: false,
 });
 
-// const childrenPath = ["/sub01", "/sub02"];
-// router.beforeEach((to, from, next) => {
-//   if (to.name) {
-//     // 有 name 属性，说明是主应用的路由
-//     next();
-//   }
-//   if (childrenPath.some((item) => to.path.includes(item))) {
-//     next();
-//   }
-//   next({ name: "404" });
-// });
+let routesDataList = [];
+router.beforeEach(async (to, from, next) => {
+  // 第一步：判断路由白名单
+  // 第二步：判断路由数据
+  if (router.options.isAddAsyncMenuData) {
+    next();
+  } else {
+    let routeData = store.state.menuList;
+    if (routeData === null) {
+      await store.dispatch("getMenuList");
+      routeData = store.state.menuList;
+    }
+    for (let i = 0; i < routeData.length; i++) {
+      const element = routeData[i];
+      const routes = handleRoutesData(element.menuList);
+      routesDataList = [...routesDataList, ...routes];
+    }
+    router.options.isAddAsyncMenuData = true;
+    pagesRouter[0].children = [...pagesRouter[0].children, ...routesDataList];
+    router.addRoutes(pagesRouter);
+    next({ replace: true }); // hack方法 确保addRoutes已完成
+  }
+});
+
+// // 处理路由数据
+function handleRoutesData(routeData) {
+  let routes = [];
+  for (let i = 0; i < routeData.length; i++) {
+    const element = routeData[i];
+    const route = {
+      path: element.path,
+      component: () => import("@/views/Layout.vue"),
+      name: element.name,
+      meta: element.meta,
+    };
+    routes.push(route);
+  }
+  return routes;
+}
 
 export default router;

@@ -16,7 +16,7 @@
         <nav-menu></nav-menu>
       </el-header>
       <el-main>
-        <slot name="content"></slot>
+        <slot></slot>
       </el-main>
     </el-container>
   </el-container>

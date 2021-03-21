@@ -1,24 +1,17 @@
 <template>
   <div id="app">
-    <layout>
-      <template v-slot:content>
-        <div id="subapp-viewport" class="app-view-box"></div>
-      </template>
-    </layout>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Layout from "@/layout/index.vue";
-export default {
-  components: {
-    Layout,
-  },
-};
+export default {};
 </script>
 
 <style lang="scss">
 html {
+  margin: 0;
+  padding: 0;
   font-size: 625%;
   -webkit-text-size-adjust: 100%; // 4
   -ms-text-size-adjust: 100%; // 4
@@ -27,6 +20,7 @@ html {
   max-height: 100%;
 }
 body {
+  margin: 0;
   padding: 0;
   height: 100%;
   max-height: 100%;

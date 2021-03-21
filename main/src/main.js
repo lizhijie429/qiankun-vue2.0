@@ -11,6 +11,11 @@ import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 
 import "./qiankun";
+import validator from "validator";
+Vue.prototype.$validator = validator;
+import http from "./utils/axios";
+Vue.prototype.$http = http;
+
 Vue.config.productionTip = false;
 
 new Vue({

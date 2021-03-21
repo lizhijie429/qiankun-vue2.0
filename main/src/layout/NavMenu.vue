@@ -15,13 +15,13 @@
         <span v-if="!isScresnFull" class="qiankun-font iconscreen-full" @click="screenfullClick()"></span>
         <span v-else class="qiankun-font iconscreen-exit" @click="screenfullClick()"></span>
       </div>
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <div class="flex-row flex-items-center cursor-pointer">
           <el-avatar class="border" :src="avatarImg"></el-avatar>
         </div>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人设置</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item command="setting">个人设置</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -40,6 +40,11 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    handleCommand(command) {
+      if (command === "logout") {
+        this.$router.push({ path: "/login" });
+      }
     },
     screenfullClick() {
       if (screenfull.isEnabled) {

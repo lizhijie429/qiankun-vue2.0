@@ -25,6 +25,7 @@ VueRouter.prototype.push = function push(location) {
 
 const router = new VueRouter({
   base: window.__POWERED_BY_QIANKUN__ ? `${process.env.VUE_APP_BASE_URL}` : "/",
+  mode: "history",
   routes,
 });
 

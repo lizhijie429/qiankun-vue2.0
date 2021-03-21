@@ -1,6 +1,8 @@
 import Vue from "vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import validator from "validator";
+Vue.prototype.$validator = validator;
 
 function setCommonData(props) {
   const { store } = props.data;

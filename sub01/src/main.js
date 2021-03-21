@@ -14,7 +14,7 @@ function render(props = {}) {
     router,
     store,
     render: (h) => h(App),
-  }).$mount(container ? container.querySelector("#app") : "#app");
+  }).$mount(container ? container.querySelector("#subapp") : "#app");
 }
 
 // 独立运行时
