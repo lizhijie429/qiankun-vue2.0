@@ -5,13 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.15.1",
     "normalize-css": "^2.3.1",
     "qiankun": "^2.4.0",
+    "screenfull": "^5.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
