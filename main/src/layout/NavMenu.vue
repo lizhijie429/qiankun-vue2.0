@@ -37,15 +37,6 @@ export default {
       isScresnFull: false,
     };
   },
-  mounted() {
-    window.onresize = () => {
-      // 全屏下监控是否按键了ESC
-      if (this.checkFull()) {
-        // 全屏下按键esc后要执行的动作
-        this.isScresnFull = !this.isScresnFull;
-      }
-    };
-  },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -53,17 +44,8 @@ export default {
     screenfullClick() {
       if (screenfull.isEnabled) {
         screenfull.toggle();
+        this.isScresnFull = !this.isScresnFull;
       }
-    },
-    /* 是否全屏并按键ESC键的方法 */
-    checkFull() {
-      var isFull =
-        document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
-      // to fix : false || undefined == undefined
-      if (isFull === undefined) {
-        isFull = false;
-      }
-      return isFull;
     },
   },
 };
