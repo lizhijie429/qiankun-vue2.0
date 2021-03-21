@@ -12,8 +12,8 @@
     </el-menu>
     <div class="flex-row flex-items-center">
       <div class="cursor-pointer" style="height: 60px">
-        <span v-if="!isScresnFull" class="qiankun-font iconscreen-full" @click="screenfullClick(true)"></span>
-        <span v-else class="qiankun-font iconscreen-exit" @click="screenfullClick(false)"></span>
+        <span v-if="!isScresnFull" class="qiankun-font iconscreen-full" @click="screenfullClick()"></span>
+        <span v-else class="qiankun-font iconscreen-exit" @click="screenfullClick()"></span>
       </div>
       <el-dropdown>
         <div class="flex-row flex-items-center cursor-pointer">
@@ -37,15 +37,33 @@ export default {
       isScresnFull: false,
     };
   },
+  mounted() {
+    window.onresize = () => {
+      // 全屏下监控是否按键了ESC
+      if (this.checkFull()) {
+        // 全屏下按键esc后要执行的动作
+        this.isScresnFull = !this.isScresnFull;
+      }
+    };
+  },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    screenfullClick(value) {
-      this.isScresnFull = value;
+    screenfullClick() {
       if (screenfull.isEnabled) {
         screenfull.toggle();
       }
+    },
+    /* 是否全屏并按键ESC键的方法 */
+    checkFull() {
+      var isFull =
+        document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+      // to fix : false || undefined == undefined
+      if (isFull === undefined) {
+        isFull = false;
+      }
+      return isFull;
     },
   },
 };
