@@ -23,8 +23,6 @@ let pagesRouter = [
     path: "/",
     name: "layout",
     component: Layout,
-    redirect: process.env.VUE_APP_DEFAULT_APP,
-    // redirect: "home",
     children: [
       {
         path: "/home",

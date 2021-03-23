@@ -36,7 +36,7 @@ actions.offGlobalStateChange();
 Vue.prototype.$actions = actions;
 
 // 传入子应用的公共数据
-export const props = {
+export const share = {
   data: {
     store,
   },

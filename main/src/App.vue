@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="main">
     <router-view></router-view>
   </div>
 </template>
@@ -28,7 +28,7 @@ body {
   font-family: "Microsoft YaHei", "微软雅黑", "MicrosoftJhengHei", "STHeiti", "MingLiu";
   color: #303133;
 }
-#app {
+#main {
   height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

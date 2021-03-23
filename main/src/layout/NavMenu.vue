@@ -1,13 +1,9 @@
 <template>
   <div class="flex-row border-bottom" style="padding: 0px 20px; height: 60px">
     <el-menu class="flex-1 none-border" default-active="1" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">
+      <el-menu-item v-for="(item, index) in microApps" :key="index + 'microApps'" :index="item.activeRule">
         <i class="el-icon-menu"></i>
-        <span slot="title">子项目一</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-document"></i>
-        <span slot="title">子项目二</span>
+        <span slot="title">{{ item.name }}</span>
       </el-menu-item>
     </el-menu>
     <div class="flex-row flex-items-center">
@@ -30,16 +26,22 @@
 
 <script>
 import screenfull from "screenfull";
+import microApps from "../qiankun/app";
 export default {
   data() {
     return {
+      microApps,
       avatarImg: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
       isScresnFull: false,
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    goto(item) {
+      history.pushState(null, item.activeRule, item.activeRule);
+      // this.current = item.name
+    },
+    handleSelect(key) {
+      history.pushState(null, key, key);
     },
     handleCommand(command) {
       if (command === "logout") {

@@ -1,4 +1,6 @@
-// 子应用注册
+import { share } from "./share";
+
+// 获取子应用列表
 let microApps = [];
 let appsConfig = process.env;
 for (const item in appsConfig) {
@@ -7,14 +9,22 @@ for (const item in appsConfig) {
     let appItem = {
       name,
       entry: process.env[item],
-      activeRule: genActiveRule(`/${name}`),
-      container: "#subapp-viewport", // 子应用挂载的div
+      activeRule: `/${name}`,
     };
     microApps.push(appItem);
   }
 }
 
-function genActiveRule(routerPrefix) {
-  return (location) => location.pathname.startsWith(routerPrefix);
-}
-export default microApps;
+// 下发数据封装
+const apps = microApps.map((item) => {
+  return {
+    ...item,
+    container: "#subapp-viewport", // 子应用挂载的div
+    props: {
+      routerBase: item.activeRule, // 下发基础路由
+      ...share,
+    },
+  };
+});
+console.log("apps", apps);
+export default apps;
