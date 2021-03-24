@@ -24,7 +24,10 @@ export default {
   },
   mounted() {
     this.isMainPage(this.$route);
-    registerApps();
+    if (!window.qiankunStarted) {
+      window.qiankunStarted = true;
+      registerApps();
+    }
   },
   methods: {
     isMainPage(value) {

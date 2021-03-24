@@ -3,7 +3,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import common from "../../common";
+import common from "./common/index";
 Vue.config.productionTip = false;
 
 let instance = null;
