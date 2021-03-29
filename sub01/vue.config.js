@@ -1,7 +1,7 @@
 const packageName = require("./package.json").name;
 
 module.exports = {
-  assetsDir: './',
+  assetsDir: "./",
   configureWebpack: {
     output: {
       library: `${packageName}-[name]`,

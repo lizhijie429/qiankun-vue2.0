@@ -7,6 +7,7 @@
       </el-menu-item>
     </el-menu>
     <div class="flex-row flex-items-center">
+      <div style="padding-right: 20px">{{ userName }}</div>
       <div class="cursor-pointer" style="height: 60px">
         <span v-if="!isScresnFull" class="qiankun-font iconscreen-full" @click="screenfullClick()"></span>
         <span v-else class="qiankun-font iconscreen-exit" @click="screenfullClick()"></span>
@@ -35,10 +36,14 @@ export default {
       isScresnFull: false,
     };
   },
+  computed: {
+    userName() {
+      return this.$store.state.userInfo.name;
+    },
+  },
   methods: {
     goto(item) {
       history.pushState(null, item.activeRule, item.activeRule);
-      // this.current = item.name
     },
     handleSelect(key) {
       history.pushState(null, key, key);
@@ -46,6 +51,11 @@ export default {
     handleCommand(command) {
       if (command === "logout") {
         this.$router.push({ path: "/login" });
+        return;
+      }
+      if (command === "setting") {
+        this.$store.commit("UPDATE_USER_INFO_ITEM", { key: "userInfo", value: { name: "zhangsan" } });
+        this.$actions.setGlobalState({ userInfo: { name: "zhangsan" } });
       }
     },
     screenfullClick() {

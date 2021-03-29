@@ -11,14 +11,24 @@ export default new Vuex.Store({
     menuList: null,
   },
   mutations: {
-    UPDATE_MENU_LIST(state, value) {
-      state.menuList = value;
+    UPDATE_MENU_LIST(state, payload) {
+      state.menuList = payload;
+    },
+    UPDATE_USER_INFO_ITEM(state, payload) {
+      state[payload.key] = payload.value;
+    },
+    UPDATE_GLOBAL_CONFIG_ITEM(state, payload) {
+      state[payload.key] = payload.value;
+    },
+    UPDATE_USER_INFO(state, payload) {
+      state.userInfo = payload;
+    },
+    UPDATE_GLOBAL_CONFIG(state, payload) {
+      state.globalConfig = payload;
     },
   },
   actions: {
     async getMenuList({ commit }) {
-      // const res = await http.get("../../public/mock/menu.json");
-      // console.log("--------------", res);
       commit("UPDATE_MENU_LIST", menuDataList);
     },
   },

@@ -3,19 +3,28 @@ import store from "@/store";
 import { initGlobalState } from "qiankun";
 
 let initialState = Vue.observable({
-  userInfo: {}, // 当前登录用户
-  globalConfig: {},
+  userInfo: store.state.userInfo, // 当前登录用户
+  globalConfig: store.state.globalConfig,
+  // userInfo: {}, // 当前登录用户
+  // globalConfig: {},
 });
 
 // 初始化state
 const actions = initGlobalState(initialState);
 
-actions.onGlobalStateChange((newValue, oldValue) => {
-  // state: 变更后的状态; prev 变更前的状态
-  console.log("state: 变更后的状态", newValue);
-  console.log("prev: 变更后的状态", oldValue);
+actions.onGlobalStateChange((newValue) => {
+  console.log("newValue", newValue);
+  // 修改全局下发的数据
   for (let key in newValue) {
     initialState[key] = newValue[key];
+    if (key === "userInfo") {
+      store.commit("UPDATE_USER_INFO", newValue[key]);
+      continue;
+    }
+    if (key === "globalConfig") {
+      store.commit("UPDATE_GLOBAL_CONFIG", newValue[key]);
+      continue;
+    }
   }
 });
 
@@ -29,16 +38,11 @@ actions.getGlobalState = (key) => {
   return key ? initialState[key] : initialState;
 };
 
-// 移除当前应用的状态监听，微应用 umount 时会默认调用
-actions.offGlobalStateChange();
-
 // 将action对象绑到Vue原型上，为了项目中其他地方使用方便
 Vue.prototype.$actions = actions;
 
 // 传入子应用的公共数据
 export const share = {
-  data: {
-    store,
-  },
+  mainStore: store,
   getGlobalState: actions.getGlobalState, // 下发getGlobalState方法
 };

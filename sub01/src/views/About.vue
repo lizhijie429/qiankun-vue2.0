@@ -1,5 +1,23 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <el-button type="primary" @click="update">更新姓名</el-button>
   </div>
 </template>
+
+<script>
+import { mapState, mapActions } from "vuex";
+export default {
+  computed: {
+    ...mapState("global", {
+      user: (state) => state.user, // 获取父应用的user信息
+    }),
+  },
+  methods: {
+    ...mapActions("global", ["setGlobalState"]),
+    update() {
+      this.setGlobalState("userInfo", { name: "张三" });
+    },
+  },
+};
+</script>

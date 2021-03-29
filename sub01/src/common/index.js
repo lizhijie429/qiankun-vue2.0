@@ -5,9 +5,8 @@ import validator from "validator";
 Vue.prototype.$validator = validator;
 
 function setCommonData(props) {
-  const { store } = props.data;
-  let formSize = store.state.globalConfig.formSize;
-  Vue.use(ElementUI, { size: formSize });
+  let globalConfig = props.getGlobalState("globalConfig");
+  Vue.use(ElementUI, { size: globalConfig.formSize || "small" });
 }
 
 function initGlobalState(store, props = {}) {
@@ -15,12 +14,16 @@ function initGlobalState(store, props = {}) {
 }
 
 function registerGlobalModule(store, props = {}) {
+  debugger;
+  // 是否传入store及所传入的store是否为一个vuex的实例
+  if (!store || !store.hasModule) {
+    return;
+  }
   // 获取初始化的state
   const initState = (props.getGlobalState && props.getGlobalState()) || {
-    user: {},
-    currentProject: {},
+    userInfo: {},
+    globalConfig: {},
   };
-
   // 将父应用的数据存储到子应用中，命名空间固定为global
   if (!store.hasModule("global")) {
     const globalModule = {
