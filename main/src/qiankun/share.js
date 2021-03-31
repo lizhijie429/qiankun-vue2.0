@@ -1,12 +1,10 @@
 import Vue from "vue";
-import store from "@/store";
+import store from "../store";
 import { initGlobalState } from "qiankun";
 
 let initialState = Vue.observable({
-  userInfo: store.state.userInfo, // 当前登录用户
-  globalConfig: store.state.globalConfig,
-  // userInfo: {}, // 当前登录用户
-  // globalConfig: {},
+  userInfo: {}, // 当前登录用户
+  globalConfig: {},
 });
 
 // 初始化state
@@ -40,9 +38,7 @@ actions.getGlobalState = (key) => {
 
 // 将action对象绑到Vue原型上，为了项目中其他地方使用方便
 Vue.prototype.$actions = actions;
-
 // 传入子应用的公共数据
 export const share = {
-  mainStore: store,
   getGlobalState: actions.getGlobalState, // 下发getGlobalState方法
 };

@@ -14,7 +14,6 @@ function initGlobalState(store, props = {}) {
 }
 
 function registerGlobalModule(store, props = {}) {
-  debugger;
   // 是否传入store及所传入的store是否为一个vuex的实例
   if (!store || !store.hasModule) {
     return;
@@ -27,6 +26,7 @@ function registerGlobalModule(store, props = {}) {
   // 将父应用的数据存储到子应用中，命名空间固定为global
   if (!store.hasModule("global")) {
     const globalModule = {
+      namespaced: true,
       state: initState,
       actions: {
         // 子应用改变state并通知父应用

@@ -1,44 +1,37 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import store from "../store/index";
+import store from "@/store";
 import Layout from "@/views/Layout";
+import Login from "@/views/Login";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 Vue.use(VueRouter);
 
-const importFile = (fileName) => () => import(/* webpackChunkName: "main" */ `../views/${fileName}.vue`);
-
-// 路由白名单(无需嵌套上左右整体布局)
-const globalRoutes = [
+// 路由
+let constantRoutes = [
   {
     path: "/login",
     name: "login",
-    component: importFile("Login"),
+    component: Login,
+    meta: { isTabs: false, isSide: false, isMain: true },
+  },
+  {
+    path: "/",
+    name: "Layout",
+    component: Layout,
+    redirect: process.env.VUE_APP_DEFAULT_APP, // 默认加载的路由
     meta: { isTabs: false, isSide: false, isMain: true },
   },
 ];
 
-// 路由
-let pagesRouter = [
-  {
-    path: "/*",
-    name: "Layout",
-    component: Layout,
-    children: [],
-  },
-  {
-    path: "/sub01",
-    name: "sub01",
-    component: Layout,
-    meta: { isTabs: true, isSide: true, isMain: true },
-  },
-  {
-    path: "/sub02",
-    name: "sub02",
-    component: Layout,
-    meta: { isTabs: true, isSide: true, isMain: true },
-  },
-  ...globalRoutes,
-];
+const createRouter = () => {
+  return new VueRouter({
+    mode: "history",
+    routes: constantRoutes,
+    isAddAsyncMenuData: false,
+  });
+};
 
 // 处理重复点击同一个路由报错的问题
 const originalPush = VueRouter.prototype.push;
@@ -46,50 +39,37 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
 
-const router = new VueRouter({
-  mode: "history",
-  routes: pagesRouter,
-  isAddAsyncMenuData: false,
+const router = createRouter();
+/**
+ * 重置注册的路由导航map
+ * 主要是为了通过addRoutes方法动态注入新路由时，避免重复注册相同name路由
+ */
+
+const resetRouter = () => {
+  const newRouter = createRouter();
+  router && (router.matcher = newRouter.matcher);
+};
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  if (!router.options.isAddAsyncMenuData) {
+    store.dispatch("generateRoutes").then((accessRoutes) => {
+      // 根据用户权限生成可访问的路由表
+      for (let i = 0, length = accessRoutes.length; i < length; i += 1) {
+        const element = accessRoutes[i];
+        router.addRoute(element);
+      }
+      router.options.isAddAsyncMenuData = true;
+      next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
+    });
+  } else {
+    next();
+  }
 });
 
-// let routesDataList = [];
-// router.beforeEach(async (to, from, next) => {
-//   // 第一步：判断路由白名单
-//   // 第二步：判断路由数据
-//   if (router.options.isAddAsyncMenuData) {
-//     next();
-//   } else {
-//     let routeData = store.state.menuList;
-//     if (routeData === null) {
-//       await store.dispatch("getMenuList");
-//       routeData = store.state.menuList;
-//     }
-//     for (let i = 0; i < routeData.length; i++) {
-//       const element = routeData[i];
-//       const routes = handleRoutesData(element.menuList);
-//       routesDataList = [...routesDataList, ...routes];
-//     }
-//     router.options.isAddAsyncMenuData = true;
-//     pagesRouter[0].children = [...pagesRouter[0].children, ...routesDataList];
-//     router.addRoutes(pagesRouter);
-//     next({ replace: true }); // hack方法 确保addRoutes已完成
-//   }
-// });
+router.afterEach(() => {
+  NProgress.done();
+});
 
-// // // 处理路由数据
-// function handleRoutesData(routeData) {
-//   let routes = [];
-//   for (let i = 0; i < routeData.length; i++) {
-//     const element = routeData[i];
-//     const route = {
-//       path: element.path,
-//       component: () => import("@/views/Layout.vue"),
-//       name: element.name,
-//       meta: element.meta,
-//     };
-//     routes.push(route);
-//   }
-//   return routes;
-// }
-
+export { constantRoutes, resetRouter };
 export default router;

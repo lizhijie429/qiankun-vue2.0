@@ -1,58 +1,40 @@
-<!--
- * @Author: your name
- * @Date: 2021-03-18 15:40:52
- * @LastEditTime: 2021-03-18 15:54:35
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue2-demo\main\src\layout\SideMenu.vue
--->
 <template>
-  <el-menu
-    style="height: 100%"
-    default-active="2"
-    @open="handleOpen"
-    @close="handleClose"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
-  >
-    <div class="logo">logo</div>
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
+  <div class="side-bar">
+    <div class="logo">
+      <span class="site-name">ADMIN LITE</span>
+    </div>
+    <el-menu
+      class="side-menu"
+      :default-active="$route.path"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#00142a"
+      text-color="hsla(0, 0%, 100%, .65)"
+      active-text-color="#409EFF"
+    >
+      <template v-for="item in menuList">
+        <el-menu-item v-if="item.name !== '404'" :key="item.name" :index="item.path" @click="handleSelect(item)">
+          <i class="el-icon-menu"></i>
+          <span slot="title">{{ item.title }}</span>
+        </el-menu-item>
       </template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <i class="el-icon-document"></i>
-      <span slot="title">导航三</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
-    </el-menu-item>
-  </el-menu>
+    </el-menu>
+  </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState({
+      menuList: (state) => state.permission.addRoutes,
+    }),
+  },
   methods: {
+    handleSelect(item) {
+      this.$router.push(item.path);
+      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -64,12 +46,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/deep/ .el-menu {
+  border-right: none;
+}
+.side-bar {
+  width: 240px;
+  height: 100%;
+}
+.side-menu {
+  width: 240px;
+  height: calc(100% - 60px);
+}
 .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 60px;
+  line-height: 64px;
+  background: #002140;
   color: #fff;
-  font-size: 36px;
   text-align: center;
-  line-height: 60px;
-  background-color: #646c75;
+  font-size: 20px;
+  font-weight: 600;
+  overflow: hidden;
 }
 </style>

@@ -1,13 +1,31 @@
 <template>
   <div class="flex-row border-bottom" style="padding: 0px 20px; height: 60px">
-    <el-menu class="flex-1 none-border" default-active="1" mode="horizontal" @select="handleSelect">
-      <el-menu-item v-for="(item, index) in microApps" :key="index + 'microApps'" :index="item.activeRule">
+    <el-menu class="flex-1 none-border" :default-active="currentModuleName" mode="horizontal">
+      <el-menu-item
+        v-for="(item, index) in microApps"
+        :key="index + 'microApps'"
+        :index="item.name"
+        @click="handleSelect(item)"
+      >
         <i class="el-icon-menu"></i>
         <span slot="title">{{ item.name }}</span>
       </el-menu-item>
     </el-menu>
     <div class="flex-row flex-items-center">
-      <div style="padding-right: 20px">{{ userName }}</div>
+      <div style="padding-right: 20px">全局数据：{{ userName }}</div>
+      <div class="menu-icons">
+        <span class="menu-icon">
+          <i class="el-icon-search icon" />
+        </span>
+        <span class="menu-icon">
+          <i class="el-icon-message icon" />
+        </span>
+        <span class="menu-icon">
+          <el-badge is-dot class="item">
+            <i class="el-icon-bell icon" />
+          </el-badge>
+        </span>
+      </div>
       <div class="cursor-pointer" style="height: 60px">
         <span v-if="!isScresnFull" class="qiankun-font iconscreen-full" @click="screenfullClick()"></span>
         <span v-else class="qiankun-font iconscreen-exit" @click="screenfullClick()"></span>
@@ -26,6 +44,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import screenfull from "screenfull";
 import microApps from "../qiankun/app";
 export default {
@@ -37,16 +56,15 @@ export default {
     };
   },
   computed: {
-    userName() {
-      return this.$store.state.userInfo.name;
-    },
+    ...mapState({
+      currentModuleName: (state) => state.permission.currentModuleName,
+      userName: (state) => state.userInfo.name,
+    }),
   },
   methods: {
-    goto(item) {
-      history.pushState(null, item.activeRule, item.activeRule);
-    },
-    handleSelect(key) {
-      history.pushState(null, key, key);
+    handleSelect(item) {
+      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.name);
+      this.$router.push(`${item.activeRule}/`);
     },
     handleCommand(command) {
       if (command === "logout") {
@@ -67,10 +85,24 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .qiankun-font {
   font-size: 22px;
   padding-right: 20px;
   line-height: 60px;
+}
+.menu-icons {
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  .menu-icon {
+    padding: 0 12px;
+    cursor: pointer;
+    .icon {
+      display: inline-block;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
 }
 </style>

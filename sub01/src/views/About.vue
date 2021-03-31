@@ -16,7 +16,7 @@ export default {
   methods: {
     ...mapActions("global", ["setGlobalState"]),
     update() {
-      this.setGlobalState("userInfo", { name: "张三" });
+      this.setGlobalState({ userInfo: { name: "sub01的张三" } });
     },
   },
 };

@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-03-18 14:55:00
- * @LastEditTime: 2021-03-19 10:29:02
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue2-demo\main\src\layout\index.vue
--->
 <template>
   <el-container style="height: 100%">
     <el-aside width="240px" style="text-align: left">
@@ -42,6 +34,5 @@ export default {
   padding: 0;
   color: #333;
   text-align: center;
-  line-height: 60px;
 }
 </style>

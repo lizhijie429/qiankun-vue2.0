@@ -1,19 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 // import http from "../utils/axios";
-import menuDataList from "../mock/menu.json";
+import permission from "./modules/permission";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     userInfo: { name: "qiankun" },
     globalConfig: { formSize: "small" },
-    menuList: null,
   },
   mutations: {
-    UPDATE_MENU_LIST(state, payload) {
-      state.menuList = payload;
-    },
     UPDATE_USER_INFO_ITEM(state, payload) {
       state[payload.key] = payload.value;
     },
@@ -27,10 +24,8 @@ export default new Vuex.Store({
       state.globalConfig = payload;
     },
   },
-  actions: {
-    async getMenuList({ commit }) {
-      commit("UPDATE_MENU_LIST", menuDataList);
-    },
+  actions: {},
+  modules: {
+    permission,
   },
-  modules: {},
 });

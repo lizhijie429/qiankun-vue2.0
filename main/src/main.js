@@ -4,7 +4,6 @@ import router from "./router";
 import store from "./store";
 
 import "normalize-css";
-import "nprogress/nprogress.css";
 import "./assets/fonts/iconfont.css";
 import "./assets/scss/index.scss";
 import ElementUI from "element-ui";
