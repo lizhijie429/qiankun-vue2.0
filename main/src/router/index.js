@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-import Layout from "@/views/Layout";
 import Login from "@/views/Login";
+import Home from "@/views/Home";
+import Layout from "@/views/Layout";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -22,6 +23,14 @@ let constantRoutes = [
     component: Layout,
     redirect: process.env.VUE_APP_DEFAULT_APP, // 默认加载的路由
     meta: { isTabs: false, isSide: false, isMain: true },
+    children: [
+      {
+        path: "/home",
+        name: "Home",
+        component: Home,
+        meta: { isTabs: false, isSide: false, isMain: true },
+      },
+    ],
   },
 ];
 

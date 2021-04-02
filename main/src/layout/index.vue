@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import SideMenu from "./SideMenu.vue";
-import NavMenu from "./NavMenu.vue";
+import { SideMenu, NavMenu } from "./components/index";
 export default {
   components: {
     SideMenu,
@@ -26,9 +25,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/.el-container {
-  height: 100%;
-}
 .el-header,
 .el-footer {
   padding: 0;

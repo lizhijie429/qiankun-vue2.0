@@ -2,7 +2,6 @@
   <div class="home">
     <h1>main登录页面</h1>
     <el-button type="primary" @click="toHome">登录</el-button>
-    <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
 

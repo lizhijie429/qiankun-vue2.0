@@ -13,7 +13,7 @@
       active-text-color="#409EFF"
     >
       <template v-for="item in menuList">
-        <el-menu-item v-if="item.name !== '404'" :key="item.name" :index="item.path" @click="handleSelect(item)">
+        <el-menu-item v-if="item.name !== 'notfound'" :key="item.name" :index="item.path" @click="handleSelect(item)">
           <i class="el-icon-menu"></i>
           <span slot="title">{{ item.title }}</span>
         </el-menu-item>

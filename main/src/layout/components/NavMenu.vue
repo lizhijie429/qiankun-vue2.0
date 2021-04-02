@@ -1,6 +1,10 @@
 <template>
   <div class="flex-row border-bottom" style="padding: 0px 20px; height: 60px">
     <el-menu class="flex-1 none-border" :default-active="currentModuleName" mode="horizontal">
+      <el-menu-item index="home" @click="toHome">
+        <i class="el-icon-menu"></i>
+        <span slot="title">首页</span>
+      </el-menu-item>
       <el-menu-item
         v-for="(item, index) in microApps"
         :key="index + 'microApps'"
@@ -46,7 +50,7 @@
 <script>
 import { mapState } from "vuex";
 import screenfull from "screenfull";
-import microApps from "../qiankun/app";
+import microApps from "../../qiankun/app";
 export default {
   data() {
     return {
@@ -62,6 +66,10 @@ export default {
     }),
   },
   methods: {
+    toHome() {
+      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", "home");
+      this.$router.push(`/home`);
+    },
     handleSelect(item) {
       this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.name);
       this.$router.push(`${item.activeRule}/`);

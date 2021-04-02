@@ -7,7 +7,7 @@ const permission = {
   state: () => ({
     routers: null,
     addRoutes: [],
-    currentModuleName: "sub01",
+    currentModuleName: "home",
   }),
   mutations: {
     UPDATE_CURRENT_MODULE_NAME(state, payload) {
@@ -31,7 +31,7 @@ const permission = {
           }
           routes.push({
             path: "*",
-            name: "404",
+            name: "notfound",
             component: () => import("@/views/404.vue"),
           });
           commit("UPDATE_MENU_LIST", routes);
