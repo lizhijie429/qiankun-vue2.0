@@ -3,13 +3,19 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import common from "./common/index";
+import common from "qiankun-vue2-common";
 Vue.config.productionTip = false;
 
-let instance = null;
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import validator from "validator";
+Vue.prototype.$validator = validator;
 
+let instance = null;
 function render(props = {}) {
   const { container } = props;
+  let globalConfig = props.getGlobalState("globalConfig");
+  Vue.use(ElementUI, { size: globalConfig.formSize || "small" });
   instance = new Vue({
     router,
     store,
