@@ -1,6 +1,6 @@
 # qiankun-vue2.0
 
-#### 介绍
+### 介绍
 
 基于 qiankun+vue2.0 技术栈实现的前端微应用架构，实现了动态路由（所有路由均使用 history 模式）、主子应用以及子子应用之间的通信，并做了简单的自动化脚本命令，可用一行命令所有子应用的依赖安装、启动以及打包部署。
 
@@ -8,15 +8,13 @@
 
 
 
-#### 关于项目依赖包qiankun-vue2-common：
+### 关于项目依赖包qiankun-vue2-common：
 
-npm地址：[qiankun-vue2-common - npm (npmjs.com)](https://www.npmjs.com/package/qiankun-vue2-common)
+**说明：**所有子应用都需要对主应用下发的数据进行接收及处理、如果数据修改则通知到其他应用以及对主应用下发的路由数据进行处理，因为这些逻辑完全一样，因此将这些实现逻辑提取为一个npm包统一管理。
 
-gitee地址：[qiankun-vue2-common](https://gitee.com/lizhijie429/qiankun-vue2-common)
+**npm地址：**[qiankun-vue2-common - npm (npmjs.com)](https://www.npmjs.com/package/qiankun-vue2-common)
 
-> **说明：**所有子应用都需要对主应用下发的数据进行接收及处理、如果数据修改则通知到其他应用以及对主应用下发的路由数据进行处理，因为这些逻辑完全一样，因此将这些实现逻辑提取为一个npm包统一管理。
-
-
+**gitee源码地址：**[qiankun-vue2-common](https://gitee.com/lizhijie429/qiankun-vue2-common)
 
 **实现的功能：**在vuex中动态添加了global模块及routes模块；
 
@@ -26,7 +24,7 @@ routes模块：路由数据的封装以及组件的导入。
 
 
 
-#### 项目运行
+### 项目运行
 
 1. 项目克隆
 
