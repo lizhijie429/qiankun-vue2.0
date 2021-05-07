@@ -62,6 +62,7 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   if (to.path === "/home") {
     sessionStorage.removeItem("currentMenu");
+    sessionStorage.removeItem("currentPage");
     store.commit("UPDATE_CURRENT_MODULE_NAME", "home");
     store.commit("UPDATE_SUB_MENU", true);
   }

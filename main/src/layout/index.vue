@@ -28,6 +28,12 @@ export default {
     }),
   },
   mounted() {
+    const currentPage = sessionStorage.getItem("currentPage");
+    if (currentPage) {
+      this.$store.commit("UPDATE_CURRENT_PAGE", currentPage);
+    } else {
+      this.$store.commit("UPDATE_CURRENT_PAGE", "/home");
+    }
     const currentMenu = sessionStorage.getItem("currentMenu");
     if (currentMenu) {
       let menuData = JSON.parse(currentMenu);

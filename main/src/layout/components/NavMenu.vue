@@ -69,6 +69,7 @@ export default {
   methods: {
     toHome() {
       this.$router.push(`/home`);
+      this.$store.commit("UPDATE_CURRENT_PAGE", "/home");
     },
     filterMenus(valuse) {
       if (valuse) {
@@ -84,7 +85,10 @@ export default {
       sessionStorage.setItem("currentMenu", JSON.stringify(item));
       this.filterMenus(item.name);
       this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.name);
-      this.$router.push(`${item.activeRule}/home`);
+      let routePath = `${item.activeRule}/home`;
+      this.$store.commit("UPDATE_CURRENT_PAGE", routePath);
+      sessionStorage.setItem("currentPage", routePath);
+      this.$router.push(routePath);
     },
     handleCommand(command) {
       if (command === "logout") {

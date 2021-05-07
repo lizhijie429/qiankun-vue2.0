@@ -9,7 +9,7 @@ const permission = {
     menus: [],
     subMenu: [],
     currentModuleName: "home",
-    currentPage: "/home",
+    currentPage: null,
   }),
   mutations: {
     UPDATE_CURRENT_MODULE_NAME(state, payload) {
