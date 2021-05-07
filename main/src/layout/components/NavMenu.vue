@@ -39,8 +39,8 @@
           <el-avatar class="border" :src="avatarImg"></el-avatar>
         </div>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="setting">个人设置</el-dropdown-item>
-          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          <el-dropdown-item command="setting">修改用户名</el-dropdown-item>
+          <el-dropdown-item command="logout">跳转登录页</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>

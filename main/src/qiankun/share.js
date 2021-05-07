@@ -4,7 +4,7 @@ import { initGlobalState } from "qiankun";
 
 let initialState = Vue.observable({
   userInfo: {}, // 当前登录用户
-  globalConfig: { formSize: "small" },
+  globalConfig: {},
   routers: [],
 });
 

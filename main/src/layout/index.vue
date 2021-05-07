@@ -18,6 +18,7 @@
 import { mapState } from "vuex";
 import { SideMenu, NavMenu } from "./components/index";
 export default {
+  name: "Layout",
   components: {
     SideMenu,
     NavMenu,

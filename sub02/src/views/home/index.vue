@@ -1,18 +1,29 @@
 <template>
   <div class="home">
     <h1>sub02</h1>
-    <img alt="Vue logo" src="../../assets/logo.png" />
-    <el-button @click="update">修改用户名</el-button>
-    <div>整个子应用的state：{{ $store.state }}</div>
+    <el-button type="primary" @click="update">修改用户名</el-button>
+    <div class="json-container-title">初始化后的this.$store.state的所有内容：</div>
+    <json-view :data="jsonData" :deep="4" theme="vs-code" />
   </div>
 </template>
 
 <script>
+import jsonView from "vue-json-views";
 import { mapState, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      jsonData: this.$store.state,
+    };
+  },
+  components: {
+    jsonView,
+  },
   computed: {
     ...mapState("global", {
-      user: (state) => state.user, // 获取父应用的user信息
+      userInfo: (state) => {
+        return JSON.stringify(state.userInfo);
+      }, // 获取父应用的user信息
     }),
   },
   methods: {
@@ -23,3 +34,16 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+/deep/ .json-view-container .json-view {
+  padding-left: 0.4rem !important;
+}
+/deep/ .json-view-container .json-view .json-item {
+  padding-left: 0.4rem !important;
+}
+.json-container-title {
+  padding: 0.3rem 0 0.1rem;
+  font-size: 0.16rem;
+  font-weight: bold;
+}
+</style>

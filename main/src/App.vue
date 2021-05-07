@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  mounted() {},
+  // 初始化全局下发的数据
+  mounted() {
+    this.$actions.setGlobalState({
+      userInfo: { name: "qiiankun" },
+      globalConfig: { formSize: "small" },
+    });
+  },
 };
 </script>
 
@@ -35,7 +41,6 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 </style>

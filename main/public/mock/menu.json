@@ -5,7 +5,7 @@
     "icon": "子应用1",
     "menuList": [
       {
-        "title": "sub01首页",
+        "title": "应用跳转",
         "moduleName": "sub01",
         "name": "sub01home",
         "path": "/sub01/home",
@@ -14,7 +14,7 @@
         "meta": { "isTabs": true, "isSide": true }
       },
       {
-        "title": "sub01关于",
+        "title": "数据修改",
         "moduleName": "sub01",
         "name": "sub01about",
         "path": "/sub01/about",
@@ -30,7 +30,7 @@
     "icon": "子应用2",
     "menuList": [
       {
-        "title": "sub02首页",
+        "title": "全局数据展示",
         "moduleName": "sub02",
         "name": "sub02home",
         "path": "/sub02/home",
@@ -39,7 +39,7 @@
         "meta": { "isTabs": true, "isSide": true }
       },
       {
-        "title": "sub02关于",
+        "title": "页面展示",
         "moduleName": "sub02",
         "name": "sub02about",
         "path": "/sub02/about",
