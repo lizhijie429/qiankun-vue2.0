@@ -1,4 +1,4 @@
-import { share } from "./share";
+import props from "./share";
 
 // 获取子应用列表
 let microApps = [];
@@ -22,8 +22,7 @@ const apps = microApps.map((item) => {
     container: "#subapp-viewport", // 子应用挂载的div
     props: {
       routerBase: item.activeRule, // 下发基础路由
-      getGlobalState: share.getGlobalState, // 下发getGlobalState方法
-      ...share,
+      getGlobalState: props.getGlobalState, // 下发getGlobalState方法
     },
   };
 });

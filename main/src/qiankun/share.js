@@ -4,7 +4,8 @@ import { initGlobalState } from "qiankun";
 
 let initialState = Vue.observable({
   userInfo: {}, // 当前登录用户
-  globalConfig: {},
+  globalConfig: { formSize: "small" },
+  routers: [],
 });
 
 // 初始化state
@@ -23,6 +24,10 @@ actions.onGlobalStateChange((newValue) => {
       store.commit("UPDATE_GLOBAL_CONFIG", newValue[key]);
       continue;
     }
+    if (key === "routers") {
+      store.commit("UPDATE_SUB_MENU", newValue[key]);
+      continue;
+    }
   }
 });
 
@@ -38,7 +43,5 @@ actions.getGlobalState = (key) => {
 
 // 将action对象绑到Vue原型上，为了项目中其他地方使用方便
 Vue.prototype.$actions = actions;
-// 传入子应用的公共数据
-export const share = {
-  getGlobalState: actions.getGlobalState, // 下发getGlobalState方法
-};
+
+export default actions;

@@ -3,13 +3,13 @@
     <h1>sub01</h1>
     <el-button type="primary" @click="gotoLogin">跳转登录页</el-button>
     <el-button type="success" @click="gotoSub02">跳转sub02</el-button>
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../../assets/logo.png" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "sub01Home",
   components: {},
   methods: {
     gotoSub02() {

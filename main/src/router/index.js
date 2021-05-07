@@ -53,7 +53,6 @@ const router = createRouter();
  * 重置注册的路由导航map
  * 主要是为了通过addRoutes方法动态注入新路由时，避免重复注册相同name路由
  */
-
 const resetRouter = () => {
   const newRouter = createRouter();
   router && (router.matcher = newRouter.matcher);
@@ -61,6 +60,11 @@ const resetRouter = () => {
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
+  if (to.path === "/home") {
+    sessionStorage.removeItem("currentMenu");
+    store.commit("UPDATE_CURRENT_MODULE_NAME", "home");
+    store.commit("UPDATE_SUB_MENU", true);
+  }
   if (!router.options.isAddAsyncMenuData) {
     store.dispatch("generateRoutes").then((accessRoutes) => {
       // 根据用户权限生成可访问的路由表
@@ -81,4 +85,5 @@ router.afterEach(() => {
 });
 
 export { constantRoutes, resetRouter };
+
 export default router;

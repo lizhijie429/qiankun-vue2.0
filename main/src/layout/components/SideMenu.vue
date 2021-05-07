@@ -5,14 +5,14 @@
     </div>
     <el-menu
       class="side-menu"
-      :default-active="$route.path"
+      :default-active="currentPage"
       @open="handleOpen"
       @close="handleClose"
       background-color="#00142a"
       text-color="hsla(0, 0%, 100%, .65)"
       active-text-color="#409EFF"
     >
-      <template v-for="item in menuList">
+      <template v-for="item in subMenu">
         <el-menu-item v-if="item.name !== 'notfound'" :key="item.name" :index="item.path" @click="handleSelect(item)">
           <i class="el-icon-menu"></i>
           <span slot="title">{{ item.title }}</span>
@@ -27,7 +27,8 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      menuList: (state) => state.permission.addRoutes,
+      subMenu: (state) => state.permission.subMenu,
+      currentPage: (state) => state.permission.currentPage,
     }),
   },
   methods: {

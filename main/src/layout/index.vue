@@ -15,11 +15,39 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { SideMenu, NavMenu } from "./components/index";
 export default {
   components: {
     SideMenu,
     NavMenu,
+  },
+  computed: {
+    ...mapState({
+      menus: (state) => state.permission.menus,
+    }),
+  },
+  mounted() {
+    const currentMenu = sessionStorage.getItem("currentMenu");
+    if (currentMenu) {
+      let menuData = JSON.parse(currentMenu);
+      this.filterMenus(menuData.name);
+      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", menuData.name);
+    } else {
+      this.$store.commit("UPDATE_SUB_MENU", true);
+    }
+  },
+  methods: {
+    filterMenus(valuse) {
+      if (valuse) {
+        this.menus.forEach((element) => {
+          if (element.moduleName === valuse) {
+            this.$actions.setGlobalState({ routers: element.menuList });
+            this.$store.commit("UPDATE_SUB_MENU", element.menuList);
+          }
+        });
+      }
+    },
   },
 };
 </script>

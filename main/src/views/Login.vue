@@ -9,6 +9,8 @@
 export default {
   name: "Login",
   mounted() {
+    sessionStorage.removeItem("currentMenu");
+    sessionStorage.removeItem("currentPage");
     this.$actions.setGlobalState({ user: { name: "lizhijie" } });
   },
   methods: {

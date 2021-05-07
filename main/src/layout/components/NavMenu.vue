@@ -63,16 +63,28 @@ export default {
     ...mapState({
       currentModuleName: (state) => state.permission.currentModuleName,
       userName: (state) => state.userInfo.name,
+      menus: (state) => state.permission.menus,
     }),
   },
   methods: {
     toHome() {
-      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", "home");
       this.$router.push(`/home`);
     },
+    filterMenus(valuse) {
+      if (valuse) {
+        this.menus.forEach((element) => {
+          if (element.moduleName === valuse) {
+            this.$actions.setGlobalState({ routers: element.menuList });
+            this.$store.commit("UPDATE_SUB_MENU", element.menuList);
+          }
+        });
+      }
+    },
     handleSelect(item) {
+      sessionStorage.setItem("currentMenu", JSON.stringify(item));
+      this.filterMenus(item.name);
       this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.name);
-      this.$router.push(`${item.activeRule}/`);
+      this.$router.push(`${item.activeRule}/home`);
     },
     handleCommand(command) {
       if (command === "logout") {

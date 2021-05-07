@@ -7,8 +7,8 @@
       {
         "title": "sub01首页",
         "moduleName": "sub01",
-        "name": "001",
-        "path": "/sub01/",
+        "name": "sub01home",
+        "path": "/sub01/home",
         "component": "/home",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
@@ -16,10 +16,10 @@
       {
         "title": "sub01关于",
         "moduleName": "sub01",
-        "name": "002",
+        "name": "sub01about",
         "path": "/sub01/about",
         "component": "/about",
-        "icon": "home",
+        "icon": "about",
         "meta": { "isTabs": true, "isSide": true }
       }
     ]
@@ -32,8 +32,8 @@
       {
         "title": "sub02首页",
         "moduleName": "sub02",
-        "name": "003",
-        "path": "/sub02/",
+        "name": "sub02home",
+        "path": "/sub02/home",
         "component": "/home",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
@@ -41,10 +41,10 @@
       {
         "title": "sub02关于",
         "moduleName": "sub02",
-        "name": "004",
+        "name": "sub02about",
         "path": "/sub02/about",
         "component": "/about",
-        "icon": "home",
+        "icon": "about",
         "meta": { "isTabs": true, "isSide": true }
       }
     ]

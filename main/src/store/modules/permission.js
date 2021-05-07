@@ -6,15 +6,38 @@ import Layout from "@/views/Layout";
 const permission = {
   state: () => ({
     routers: null,
-    addRoutes: [],
+    menus: [],
+    subMenu: [],
     currentModuleName: "home",
+    currentPage: "/home",
   }),
   mutations: {
     UPDATE_CURRENT_MODULE_NAME(state, payload) {
       state.currentModuleName = payload;
     },
+    UPDATE_CURRENT_PAGE(state, payload) {
+      state.currentPage = payload;
+    },
+    UPDATE_MENUS(state, payload) {
+      state.menus = payload;
+    },
+    UPDATE_SUB_MENU(state, payload) {
+      state.subMenu = [];
+      const homeMenuData = {
+        title: "首页",
+        moduleName: "Home",
+        path: "/home",
+        meta: { isTabs: false, isSide: false, isMain: true },
+      };
+      if (typeof payload === "boolean") {
+        state.subMenu.push(homeMenuData);
+        return;
+      }
+      if (typeof payload === "object") {
+        state.subMenu = payload;
+      }
+    },
     UPDATE_MENU_LIST(state, payload) {
-      state.addRoutes = payload;
       state.routers = constantRoutes.concat(payload);
     },
   },
@@ -34,6 +57,7 @@ const permission = {
             name: "notfound",
             component: () => import("@/views/404.vue"),
           });
+          commit("UPDATE_MENUS", res.data);
           commit("UPDATE_MENU_LIST", routes);
           resolve(routes);
         });

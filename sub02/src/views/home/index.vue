@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>sub02</h1>
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../../assets/logo.png" />
     <el-button @click="update">修改用户名</el-button>
     <div>整个子应用的state：{{ $store.state }}</div>
   </div>
