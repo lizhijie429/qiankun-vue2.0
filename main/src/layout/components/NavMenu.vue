@@ -6,13 +6,13 @@
         <span slot="title">首页</span>
       </el-menu-item>
       <el-menu-item
-        v-for="(item, index) in microApps"
-        :key="index + 'microApps'"
-        :index="item.name"
+        v-for="(item, index) in menus"
+        :key="index + 'menus'"
+        :index="item.moduleName"
         @click="handleSelect(item)"
       >
         <i class="el-icon-menu"></i>
-        <span slot="title">{{ item.name }}</span>
+        <span slot="title">{{ item.moduleTitle }}</span>
       </el-menu-item>
     </el-menu>
     <div class="flex-row flex-items-center">
@@ -50,11 +50,9 @@
 <script>
 import { mapState } from "vuex";
 import screenfull from "screenfull";
-import microApps from "../../qiankun/app";
 export default {
   data() {
     return {
-      microApps,
       avatarImg: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
       isScresnFull: false,
     };
@@ -68,24 +66,33 @@ export default {
   },
   methods: {
     toHome() {
+      const homeMenuData = {
+        title: "首页",
+        moduleName: "Home",
+        path: "/home",
+        meta: { isTabs: false, isSide: false, isMain: true },
+      };
       this.$router.push(`/home`);
       this.$store.commit("UPDATE_CURRENT_PAGE", "/home");
+      this.$store.commit("UPDATE_TABS_LIST", homeMenuData);
     },
     filterMenus(valuse) {
+      let _this = this;
       if (valuse) {
         this.menus.forEach((element) => {
           if (element.moduleName === valuse) {
-            this.$actions.setGlobalState({ routers: element.menuList });
+            this.$actions.setGlobalState({ routers: _this.menus });
             this.$store.commit("UPDATE_SUB_MENU", element.menuList);
+            this.$store.commit("UPDATE_TABS_LIST", element.menuList[0]);
           }
         });
       }
     },
     handleSelect(item) {
-      sessionStorage.setItem("currentMenu", JSON.stringify(item));
-      this.filterMenus(item.name);
-      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.name);
-      let routePath = `${item.activeRule}/home`;
+      sessionStorage.setItem("currentMenu", item.moduleName);
+      this.filterMenus(item.moduleName);
+      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
+      let routePath = `/${item.moduleName}/home`;
       this.$store.commit("UPDATE_CURRENT_PAGE", routePath);
       sessionStorage.setItem("currentPage", routePath);
       this.$router.push(routePath);

@@ -33,10 +33,11 @@ export default {
   },
   methods: {
     handleSelect(item) {
-      this.$router.push(item.path);
       this.$store.commit("UPDATE_CURRENT_PAGE", item.path);
       sessionStorage.setItem("currentPage", item.path);
       this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
+      this.$store.commit("UPDATE_TABS_LIST", item);
+      this.$router.push(item.path);
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

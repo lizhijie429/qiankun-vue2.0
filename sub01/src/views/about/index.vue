@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>sub01</h1>
     <el-button type="primary" @click="update">更新姓名</el-button>
   </div>
 </template>

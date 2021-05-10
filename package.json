@@ -14,6 +14,7 @@
     "start:sub01": "cd sub01 && start cmd /k npm run dev  ",
     "start:sub02": "cd sub02 && start cmd /k npm run dev  ",
     "update": "npm-run-all update:* ",
+    "update:main": "cd main && npm install qiankun-vue2-common ",
     "update:sub01": "cd sub01 && npm install qiankun-vue2-common ",
     "update:sub02": "cd sub02 && npm install qiankun-vue2-common ",
     "lint": "npm-run-all lint:* ",
@@ -39,5 +40,8 @@
   "license": "MIT",
   "devDependencies": {
     "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "qs": "^6.10.1"
   }
 }

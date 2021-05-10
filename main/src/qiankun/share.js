@@ -12,7 +12,6 @@ let initialState = Vue.observable({
 const actions = initGlobalState(initialState);
 
 actions.onGlobalStateChange((newValue) => {
-  console.log("newValue", newValue);
   // 修改全局下发的数据
   for (let key in newValue) {
     initialState[key] = newValue[key];
