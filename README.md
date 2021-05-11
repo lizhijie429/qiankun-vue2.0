@@ -1,5 +1,13 @@
 # qiankun-vue2.0
 
+
+
+在你决定clone项目的时候，希望你可以帮我点个 ⭐，这将对我是极大的鼓励。
+
+有问题可加微信 lizhijie429 一块探讨。
+
+
+
 ## 介绍
 
 基于 qiankun+vue2.0 技术栈实现的前端微应用架构，实现了动态路由（所有路由均使用 history 模式）、主子应用以及子子应用之间的通信，并做了简单的自动化脚本命令，可用一行命令所有子应用的依赖安装、启动以及打包部署。
@@ -52,13 +60,30 @@
    npm run update
    ```
 
-5. 打包编译
+   
+
+## 编译部署
+
+关于qiankun项目打包编译请查看文档：[入门教程 (umijs.org)](https://qiankun.umijs.org/zh/cookbook#场景-1：主应用和微应用部署到同一个服务器（同一个-ip-和端口）)  demo将主应用和微应用部署到同一个服务器（同一个 IP 和端口），其他部署方式请自行查看官网文档。
+
+打包编译
 
    ```bash
    cd qiankun-vue2.0
-   npm run lint // 修复esLint警告
    npm run build
    ```
+
+本地部署测试（ Node.js 静态文件服务器——serve）
+
+```bash
+# 启动静态文件服务器
+npm install -g serve
+# -s 参数的意思是将其架设在 Single-Page Application 模式下
+# 这个模式会处理即将提到的路由问题
+serve -s dist
+```
+
+浏览器打开网址：http://localhost:5000 即可预览。
 
 
 
