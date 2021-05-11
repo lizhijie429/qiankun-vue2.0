@@ -1,10 +1,12 @@
 const packageName = require("./package.json").name;
-
+const baseUrl = process.env.VUE_APP_BASE_URL;
 module.exports = {
   assetsDir: "./",
+  outputDir: `../dist/child/${packageName}`,
+  publicPath: process.env.NODE_ENV === "production" ? baseUrl : "/",
   configureWebpack: {
     output: {
-      library: `${packageName}-[name]`,
+      library: `${packageName}`,
       libraryTarget: "umd",
       jsonpFunction: `webpackJsonp_${packageName}`,
     },

@@ -1,5 +1,4 @@
-// import http from "@/utils/axios";
-import http from "axios";
+import http from "@/utils/axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
 
@@ -45,10 +44,11 @@ const permission = {
     generateRoutes({ commit }) {
       return new Promise((resolve) => {
         // 向后端请求路由数据
-        http.get("/api/menu.json").then((res) => {
+        http.get("/menus").then((res) => {
+          const data = res.data.data.list;
           let routes = [];
-          for (let i = 0; i < res.data.length; i++) {
-            const module = res.data[i];
+          for (let i = 0; i < data.length; i++) {
+            const module = data[i];
             const route = getMenuItem(module.menuList);
             routes = [...routes, ...route];
           }
@@ -57,7 +57,7 @@ const permission = {
             name: "notfound",
             component: () => import("@/views/404.vue"),
           });
-          commit("UPDATE_MENUS", res.data);
+          commit("UPDATE_MENUS", data);
           commit("UPDATE_MENU_LIST", routes);
           resolve(routes);
         });
