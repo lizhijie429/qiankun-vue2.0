@@ -34,7 +34,7 @@ export default {
   methods: {
     handleSelect(item) {
       this.$store.commit("UPDATE_CURRENT_PAGE", item.path);
-      sessionStorage.setItem("currentPage", item.path);
+
       this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
       this.$store.commit("UPDATE_TABS_LIST", item);
       this.$router.push(item.path);

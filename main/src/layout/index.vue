@@ -30,6 +30,12 @@ export default {
       menus: (state) => state.permission.menus,
     }),
   },
+  watch: {
+    $route(to) {
+      this.$store.commit("UPDATE_CURRENT_PAGE", to.path);
+      sessionStorage.setItem("currentPage", to.path);
+    },
+  },
   mounted() {
     const homeMenuData = {
       title: "首页",

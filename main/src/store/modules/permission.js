@@ -15,6 +15,7 @@ const permission = {
       state.currentModuleName = payload;
     },
     UPDATE_CURRENT_PAGE(state, payload) {
+      sessionStorage.setItem("currentPage", payload);
       state.currentPage = payload;
     },
     UPDATE_MENUS(state, payload) {

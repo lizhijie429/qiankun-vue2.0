@@ -53,7 +53,7 @@ export default {
         this.$store.commit("UPDATE_CURRENT_PAGE", item.path);
         this.filterMenus(item.moduleName);
         this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
-        sessionStorage.setItem("currentPage", item.path);
+
         this.$router.push({ path: item.path });
       }
     },
