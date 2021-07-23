@@ -1,12 +1,6 @@
 # qiankun-vue2.0
 
-
-
-在你决定clone项目的时候，希望你可以帮我点个 ⭐，这将对我是极大的鼓励。
-
-有问题可加微信 lizhijie429 一块探讨。
-
-
+在你决定 clone 项目的时候，希望你可以帮我点个 ⭐，这将对我是极大的鼓励。
 
 ## 介绍
 
@@ -14,7 +8,9 @@
 
 开源该 demo 的目的，只是想为大家在使用 qiankun 时提供一种思路。
 
+## 问答
 
+关于问题，请使用[issues](https://gitee.com/lizhijie429/qiankun-vue2.0/issues)或加微信 lizhijie429
 
 ## 关于项目依赖包 qiankun-vue2-common
 
@@ -28,8 +24,6 @@
 
 1. global 模块：封装了全局下发的数据，以及数据修改通知到其他应用；
 2. routes 模块：路由数据的封装以及组件的导入。
-
-
 
 ## 项目运行
 
@@ -60,18 +54,16 @@
    npm run update
    ```
 
-   
-
 ## 编译部署
 
-关于qiankun项目打包编译请查看文档：[入门教程 (umijs.org)](https://qiankun.umijs.org/zh/cookbook#场景-1：主应用和微应用部署到同一个服务器（同一个-ip-和端口）)  demo将主应用和微应用部署到同一个服务器（同一个 IP 和端口），其他部署方式请自行查看官网文档。
+关于 qiankun 项目打包编译请查看文档：[入门教程 (umijs.org)](https://qiankun.umijs.org/zh/cookbook#场景-1：主应用和微应用部署到同一个服务器（同一个-ip-和端口）) demo 将主应用和微应用部署到同一个服务器（同一个 IP 和端口），其他部署方式请自行查看官网文档。
 
 打包编译
 
-   ```bash
-   cd qiankun-vue2.0
-   npm run build
-   ```
+```bash
+cd qiankun-vue2.0
+npm run build
+```
 
 本地部署测试（ Node.js 静态文件服务器——serve）
 
@@ -85,15 +77,6 @@ serve -s dist
 
 浏览器打开网址：http://localhost:5000 即可预览。
 
-
-
-## 问答
-
-有关问题和支持，请使用[issues](https://gitee.com/lizhijie429/qiankun-vue2.0/issues)或加微信 lizhijie429
-
-
-
 ## 支持
 
-如果觉得 qiankun-vue2.0 这个demo为你提供了不错的思路，或者已经在使用了，希望你可以帮我点个 ⭐ ，这将对我是极大的鼓励。
-
+如果觉得 qiankun-vue2.0 这个 demo 为你提供了不错的思路，或者已经在使用了，希望你可以帮我点个 ⭐ ，这将对我是极大的鼓励。
