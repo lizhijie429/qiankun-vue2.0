@@ -24,11 +24,11 @@ Vue.config.productionTip = false;
 // 定义全局下发的数据
 const initialState = {
   // 当前登录用户
-  userInfo: {},
+  userInfo: null,
   // 全局配置
-  globalConfig: {},
+  globalConfig: null,
   // 路由数据
-  routers: {},
+  routers: null,
 };
 
 // 初始化全局下发的数据

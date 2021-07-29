@@ -1,7 +1,7 @@
 import http from "@/utils/axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
-
+import { qiankunActions } from "../../main";
 const permission = {
   namespaced: true,
   state: () => ({
@@ -48,6 +48,7 @@ const permission = {
         // 向后端请求路由数据
         http.get("/menus").then((res) => {
           const data = res.data.data.list;
+          commit("UPDATE_MENU_LIST", data);
           let routes = [];
           for (let i = 0; i < data.length; i++) {
             const module = data[i];
@@ -59,8 +60,8 @@ const permission = {
             name: "notfound",
             component: () => import("@/views/404.vue"),
           });
-          commit("UPDATE_MENU_LIST", data);
           commit("UPDATE_ROUTERS", routes);
+          qiankunActions.setGlobalState({ routers: routes });
           resolve(routes);
         });
       });

@@ -47,16 +47,16 @@ export default {
     const currentPage = sessionStorage.getItem("currentPage");
     if (currentPage) {
       this.filterMenuList({ path: currentPage });
-      this.$store.commit("UPDATE_CURRENT_PAGE", currentPage);
+      this.$store.commit("permission/UPDATE_CURRENT_PAGE", currentPage);
     } else {
       // 过滤左侧菜单
       const currentMenu = sessionStorage.getItem("currentMenu");
       if (currentMenu) {
         this.filterMenuList({ moduleName: currentMenu });
       } else {
-        this.$store.commit("UPDATE_SUB_MENU", true);
-        this.$store.commit("UPDATE_TABS_LIST", homeMenuData);
-        this.$store.commit("UPDATE_CURRENT_PAGE", "/home");
+        this.$store.commit("permission/UPDATE_SUB_MENU", true);
+        this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+        this.$store.commit("permission/UPDATE_CURRENT_PAGE", "/home");
       }
     }
   },
@@ -67,9 +67,9 @@ export default {
         this.menuList.forEach((element) => {
           if (element.moduleName === valuse.moduleName) {
             this.$actions.setGlobalState({ routers: _this.menus });
-            this.$store.commit("UPDATE_CURRENT_MODULE_NAME", valuse.moduleName);
-            this.$store.commit("UPDATE_SUB_MENU", element.menuList);
-            this.$store.commit("UPDATE_TABS_LIST", element.menuList[0]);
+            this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", valuse.moduleName);
+            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
+            this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
           }
         });
       } else if (valuse && valuse.path) {
@@ -77,10 +77,10 @@ export default {
           for (let i = 0, length = element.menuList.length; i < length; i += 1) {
             const item = element.menuList[i];
             if (item.path === valuse.path) {
-              this.$store.commit("UPDATE_CURRENT_MODULE_NAME", element.moduleName);
+              this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", element.moduleName);
               this.$actions.setGlobalState({ routers: _this.menus });
-              this.$store.commit("UPDATE_SUB_MENU", element.menuList);
-              this.$store.commit("UPDATE_TABS_LIST", item);
+              this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
+              this.$store.commit("tabs/UPDATE_TABS_LIST", item);
             }
           }
         });

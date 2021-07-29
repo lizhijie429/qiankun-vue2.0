@@ -11,7 +11,6 @@ export default {
     this.$actions.setGlobalState({
       userInfo: this.$store.state.user.userInfo,
       globalConfig: this.$store.state.user.globalConfig,
-      routers: this.$store.state.permission.routers,
     });
   },
 };

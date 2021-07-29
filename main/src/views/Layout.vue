@@ -7,7 +7,7 @@
 
 <script>
 import Layout from "@/layout/index.vue";
-import registerApps from "../main";
+import { registerApps } from "../main";
 export default {
   data() {
     return {

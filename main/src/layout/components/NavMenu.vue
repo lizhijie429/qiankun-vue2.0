@@ -6,7 +6,7 @@
         <span slot="title">首页</span>
       </el-menu-item>
       <el-menu-item
-        v-for="(item, index) in menus"
+        v-for="(item, index) in menuList"
         :key="index + 'menus'"
         :index="item.moduleName"
         @click="handleSelect(item)"
@@ -60,8 +60,8 @@ export default {
   computed: {
     ...mapState({
       currentModuleName: (state) => state.permission.currentModuleName,
-      userName: (state) => state.userInfo.name,
-      menus: (state) => state.permission.menuList,
+      userName: (state) => state.user.userInfo.name,
+      menuList: (state) => state.permission.menuList,
     }),
   },
   methods: {
@@ -73,27 +73,27 @@ export default {
         meta: { isTabs: false, isSide: false, isMain: true },
       };
       this.$router.push(`/home`);
-      this.$store.commit("UPDATE_CURRENT_PAGE", "/home");
-      this.$store.commit("UPDATE_TABS_LIST", homeMenuData);
+      this.$store.commit("permission/UPDATE_CURRENT_PAGE", "/home");
+      this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
     },
-    filterMenus(valuse) {
+    filterMenuList(valuse) {
       let _this = this;
       if (valuse) {
-        this.menus.forEach((element) => {
+        this.menuList.forEach((element) => {
           if (element.moduleName === valuse) {
             this.$actions.setGlobalState({ routers: _this.menus });
-            this.$store.commit("UPDATE_SUB_MENU", element.menuList);
-            this.$store.commit("UPDATE_TABS_LIST", element.menuList[0]);
+            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
+            this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
           }
         });
       }
     },
     handleSelect(item) {
       sessionStorage.setItem("currentMenu", item.moduleName);
-      this.filterMenus(item.moduleName);
-      this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
+      this.filterMenuList(item.moduleName);
+      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.moduleName);
       let routePath = `/${item.moduleName}/home`;
-      this.$store.commit("UPDATE_CURRENT_PAGE", routePath);
+      this.$store.commit("permission/UPDATE_CURRENT_PAGE", routePath);
       sessionStorage.setItem("currentPage", routePath);
       this.$router.push(routePath);
     },
@@ -103,7 +103,7 @@ export default {
         return;
       }
       if (command === "setting") {
-        this.$store.commit("UPDATE_USER_INFO_ITEM", { key: "userInfo", value: { name: "zhangsan" } });
+        this.$store.commit("user/UPDATE_USER_INFO_ITEM", { key: "userInfo", value: { name: "zhangsan" } });
         this.$actions.setGlobalState({ userInfo: { name: "zhangsan" } });
       }
     },
