@@ -3,9 +3,10 @@ import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
 
 const permission = {
+  namespaced: true,
   state: () => ({
     routers: null,
-    menus: [],
+    menuList: [],
     subMenu: [],
     currentModuleName: "home",
     currentPage: null,
@@ -18,8 +19,8 @@ const permission = {
       sessionStorage.setItem("currentPage", payload);
       state.currentPage = payload;
     },
-    UPDATE_MENUS(state, payload) {
-      state.menus = payload;
+    UPDATE_MENU_LIST(state, payload) {
+      state.menuList = payload;
     },
     UPDATE_SUB_MENU(state, payload) {
       state.subMenu = [];
@@ -37,7 +38,7 @@ const permission = {
         state.subMenu = payload;
       }
     },
-    UPDATE_MENU_LIST(state, payload) {
+    UPDATE_ROUTERS(state, payload) {
       state.routers = constantRoutes.concat(payload);
     },
   },
@@ -58,8 +59,8 @@ const permission = {
             name: "notfound",
             component: () => import("@/views/404.vue"),
           });
-          commit("UPDATE_MENUS", data);
-          commit("UPDATE_MENU_LIST", routes);
+          commit("UPDATE_MENU_LIST", data);
+          commit("UPDATE_ROUTERS", routes);
           resolve(routes);
         });
       });
@@ -78,9 +79,9 @@ function getMenuItem(menus) {
       component: Layout,
       name: menu.name,
       meta: menu.meta,
-      title: menu.title,
-      moduleName: menu.moduleName,
     };
+    route.meta.title = menu.title;
+    route.meta.moduleName = menu.moduleName;
     routers.push(route);
   }
   return routers;

@@ -19,7 +19,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      menus: (state) => state.permission.menus,
+      menus: (state) => state.permission.menuList,
       currentPage: (state) => state.permission.currentPage,
       tabsList: (state) => state.tabs.tabsList,
     }),

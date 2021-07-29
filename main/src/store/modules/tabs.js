@@ -1,5 +1,6 @@
 import router from "@/router/index";
 const tabs = {
+  namespaced: true,
   state: () => ({
     tabsList: [],
   }),

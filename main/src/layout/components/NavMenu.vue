@@ -61,7 +61,7 @@ export default {
     ...mapState({
       currentModuleName: (state) => state.permission.currentModuleName,
       userName: (state) => state.userInfo.name,
-      menus: (state) => state.permission.menus,
+      menus: (state) => state.permission.menuList,
     }),
   },
   methods: {

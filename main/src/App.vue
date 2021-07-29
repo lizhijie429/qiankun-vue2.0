@@ -9,8 +9,9 @@ export default {
   // 初始化全局下发的数据
   mounted() {
     this.$actions.setGlobalState({
-      userInfo: { name: "qiiankun" },
-      globalConfig: { formSize: "small" },
+      userInfo: this.$store.state.user.userInfo,
+      globalConfig: this.$store.state.user.globalConfig,
+      routers: this.$store.state.permission.routers,
     });
   },
 };

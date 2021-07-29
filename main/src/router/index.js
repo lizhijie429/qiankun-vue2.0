@@ -63,11 +63,11 @@ router.beforeEach((to, from, next) => {
   if (to.path === "/home") {
     sessionStorage.removeItem("currentMenu");
     sessionStorage.removeItem("currentPage");
-    store.commit("UPDATE_CURRENT_MODULE_NAME", "home");
-    store.commit("UPDATE_SUB_MENU", true);
+    store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "home");
+    store.commit("permission/UPDATE_SUB_MENU", true);
   }
   if (!router.options.isAddAsyncMenuData) {
-    store.dispatch("generateRoutes").then((accessRoutes) => {
+    store.dispatch("permission/generateRoutes").then((accessRoutes) => {
       // 根据用户权限生成可访问的路由表
       for (let i = 0, length = accessRoutes.length; i < length; i += 1) {
         const element = accessRoutes[i];

@@ -7,7 +7,7 @@
 
 <script>
 import Layout from "@/layout/index.vue";
-import registerApps from "@/qiankun/index";
+import registerApps from "../main";
 export default {
   data() {
     return {

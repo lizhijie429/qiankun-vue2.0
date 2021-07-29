@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     ...mapState({
-      menus: (state) => state.permission.menus,
+      menuList: (state) => state.permission.menuList,
     }),
   },
   watch: {
@@ -46,13 +46,13 @@ export default {
     // 当前页面持久化
     const currentPage = sessionStorage.getItem("currentPage");
     if (currentPage) {
-      this.filterMenus({ path: currentPage });
+      this.filterMenuList({ path: currentPage });
       this.$store.commit("UPDATE_CURRENT_PAGE", currentPage);
     } else {
       // 过滤左侧菜单
       const currentMenu = sessionStorage.getItem("currentMenu");
       if (currentMenu) {
-        this.filterMenus({ moduleName: currentMenu });
+        this.filterMenuList({ moduleName: currentMenu });
       } else {
         this.$store.commit("UPDATE_SUB_MENU", true);
         this.$store.commit("UPDATE_TABS_LIST", homeMenuData);
@@ -61,10 +61,10 @@ export default {
     }
   },
   methods: {
-    filterMenus(valuse) {
+    filterMenuList(valuse) {
       const _this = this;
       if (valuse && valuse.moduleName) {
-        this.menus.forEach((element) => {
+        this.menuList.forEach((element) => {
           if (element.moduleName === valuse.moduleName) {
             this.$actions.setGlobalState({ routers: _this.menus });
             this.$store.commit("UPDATE_CURRENT_MODULE_NAME", valuse.moduleName);
@@ -73,7 +73,7 @@ export default {
           }
         });
       } else if (valuse && valuse.path) {
-        this.menus.forEach((element) => {
+        this.menuList.forEach((element) => {
           for (let i = 0, length = element.menuList.length; i < length; i += 1) {
             const item = element.menuList[i];
             if (item.path === valuse.path) {
