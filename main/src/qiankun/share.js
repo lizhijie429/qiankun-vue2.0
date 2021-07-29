@@ -17,15 +17,12 @@ actions.onGlobalStateChange((newValue) => {
     initialState[key] = newValue[key];
     if (key === "userInfo") {
       store.commit("UPDATE_USER_INFO", newValue[key]);
-      continue;
     }
     if (key === "globalConfig") {
       store.commit("UPDATE_GLOBAL_CONFIG", newValue[key]);
-      continue;
     }
     if (key === "routers") {
       store.commit("UPDATE_SUB_MENU", newValue[key]);
-      continue;
     }
   }
 });

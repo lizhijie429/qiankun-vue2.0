@@ -3,9 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-// import "normalize-css";
-// import "./assets/fonts/iconfont.css";
-// import "./assets/scss/index.scss";
 import "qiankun-vue2-common/style/index.scss";
 import "qiankun-vue2-common/iconfont/iconfont.css";
 import ElementUI from "element-ui";
