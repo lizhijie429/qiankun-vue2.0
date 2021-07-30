@@ -70,39 +70,26 @@ export default {
         title: "首页",
         moduleName: "Home",
         path: "/home",
-        meta: { isTabs: false, isSide: false, isMain: true },
+        meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       };
-      this.$router.push(`/home`);
-      this.$store.commit("permission/UPDATE_CURRENT_PAGE", "/home");
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
-    },
-    filterMenuList(valuse) {
-      if (valuse) {
-        this.menuList.forEach((element) => {
-          if (element.moduleName === valuse) {
-            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
-            this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
-          }
-        });
-      }
+      this.$router.push(`/home`);
     },
     handleSelect(item) {
-      sessionStorage.setItem("currentMenu", item.moduleName);
-      this.filterMenuList(item.moduleName);
-      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.moduleName);
-      let routePath = `/${item.moduleName}/home`;
-      this.$store.commit("permission/UPDATE_CURRENT_PAGE", routePath);
-      sessionStorage.setItem("currentPage", routePath);
-      this.$router.push(routePath);
+      const menu = this.menuList.filter((element) => {
+        return element.moduleName === item.moduleName;
+      });
+      this.$store.commit("permission/UPDATE_SUB_MENU", menu[0].menuList);
     },
     handleCommand(command) {
       if (command === "logout") {
         this.$router.push({ path: "/login" });
-        return;
+        return false;
       }
       if (command === "setting") {
         this.$store.commit("user/UPDATE_USER_INFO_ITEM", { key: "userInfo", value: { name: "zhangsan" } });
         this.$actions.setGlobalState({ userInfo: { name: "zhangsan" } });
+        return false;
       }
     },
     screenfullClick() {

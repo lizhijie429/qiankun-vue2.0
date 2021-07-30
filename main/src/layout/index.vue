@@ -30,12 +30,6 @@ export default {
       menuList: (state) => state.permission.menuList,
     }),
   },
-  watch: {
-    $route(to) {
-      this.$store.commit("permission/UPDATE_CURRENT_PAGE", to.path);
-      sessionStorage.setItem("currentPage", to.path);
-    },
-  },
   mounted() {
     // 初始化全局下发的数据
     this.$actions.setGlobalState({
@@ -43,52 +37,37 @@ export default {
       globalConfig: this.$store.state.user.globalConfig,
       routers: this.$store.state.permission.routers,
     });
+    // 获取页面持久化数据
+    const currentPage = sessionStorage.getItem("currentPage");
+    const currentApp = sessionStorage.getItem("currentApp");
+    // 处理关闭前页面是首页的情况
     const homeMenuData = {
       title: "首页",
       moduleName: "Home",
       path: "/home",
-      meta: { isTabs: false, isSide: false, isMain: true },
+      meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
     };
-    // 当前页面持久化
-    const currentPage = sessionStorage.getItem("currentPage");
-    if (currentPage) {
-      this.filterMenuList({ path: currentPage });
-      this.$store.commit("permission/UPDATE_CURRENT_PAGE", currentPage);
-    } else {
-      // 过滤左侧菜单
-      const currentMenu = sessionStorage.getItem("currentMenu");
-      if (currentMenu) {
-        this.filterMenuList({ moduleName: currentMenu });
-      } else {
-        this.$store.commit("permission/UPDATE_SUB_MENU", true);
-        this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
-        this.$store.commit("permission/UPDATE_CURRENT_PAGE", "/home");
-      }
+    if (currentPage && currentPage === "/home" && currentApp && currentApp === "main") {
+      this.$store.commit("permission/UPDATE_SUB_MENU", true);
+      this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+      return false;
     }
-  },
-  methods: {
-    filterMenuList(valuse) {
-      if (valuse && valuse.moduleName) {
-        this.menuList.forEach((element) => {
-          if (element.moduleName === valuse.moduleName) {
-            this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", valuse.moduleName);
-            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
-            this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
-          }
-        });
-      } else if (valuse && valuse.path) {
-        this.menuList.forEach((element) => {
-          for (let i = 0, length = element.menuList.length; i < length; i += 1) {
-            const item = element.menuList[i];
-            if (item.path === valuse.path) {
-              this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", element.moduleName);
-              this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
-              this.$store.commit("tabs/UPDATE_TABS_LIST", item);
-            }
-          }
-        });
-      }
-    },
+    // 处理关闭前非首页页面持久化逻辑
+    if (currentPage && currentApp) {
+      // 获取左侧菜单数据
+      const menu = this.menuList.filter((element) => {
+        return element.moduleName === currentApp;
+      });
+      this.$store.commit("permission/UPDATE_SUB_MENU", menu[0].menuList);
+      // 跳转页面
+      const page = menu[0].menuList.filter((element) => {
+        return element.path === currentPage;
+      });
+      this.$store.commit("tabs/UPDATE_TABS_LIST", page[0]);
+    } else {
+      this.$store.commit("permission/UPDATE_SUB_MENU", true);
+      this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+    }
   },
 };
 </script>

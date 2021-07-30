@@ -33,8 +33,6 @@ export default {
   },
   methods: {
     handleSelect(item) {
-      this.$store.commit("permission/UPDATE_CURRENT_PAGE", item.path);
-      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.moduleName);
       this.$store.commit("tabs/UPDATE_TABS_LIST", item);
       this.$router.push(item.path);
     },

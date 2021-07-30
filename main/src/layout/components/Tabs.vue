@@ -19,21 +19,12 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      menus: (state) => state.permission.menuList,
+      menuList: (state) => state.permission.menuList,
       currentPage: (state) => state.permission.currentPage,
       tabsList: (state) => state.tabs.tabsList,
     }),
   },
   methods: {
-    filterMenus(valuse) {
-      if (valuse) {
-        this.menus.forEach((element) => {
-          if (element.moduleName === valuse) {
-            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
-          }
-        });
-      }
-    },
     // 获取元素数组下标
     getArrayIndex(arr, obj) {
       for (let index = 0; index < arr.length; index++) {
@@ -46,13 +37,16 @@ export default {
     },
     // 跳转tabs标签
     handleClick(item) {
-      if (this.currentPage === item.path) {
-        return false;
+      if (this.currentPage === item.path) return false;
+      // 设置左侧菜单数据
+      if (item.path !== "/home") {
+        const menu = this.menuList.filter((element) => {
+          return element.moduleName === item.meta.moduleName;
+        });
+        this.$store.commit("permission/UPDATE_SUB_MENU", menu[0].menuList);
+        this.$router.push({ path: item.path });
       } else {
-        this.$store.commit("permission/UPDATE_CURRENT_PAGE", item.path);
-        this.filterMenus(item.moduleName);
-        this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.moduleName);
-
+        this.$store.commit("permission/UPDATE_SUB_MENU", true);
         this.$router.push({ path: item.path });
       }
     },

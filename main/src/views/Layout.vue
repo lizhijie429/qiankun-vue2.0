@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     isMainPage(value) {
-      if (value.meta.isMain) {
-        this.isMain = value.meta.isMain;
+      if (value.meta.moduleName === "main") {
+        this.isMain = true;
       } else {
         this.isMain = false;
       }

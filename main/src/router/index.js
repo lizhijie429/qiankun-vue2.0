@@ -15,20 +15,19 @@ let constantRoutes = [
     path: "/login",
     name: "login",
     component: Login,
-    meta: { isTabs: false, isSide: false, isMain: true },
+    meta: { isTabs: false, isSide: false, moduleName: "main", title: "登录" },
   },
   {
     path: "/",
     name: "Layout",
     component: Layout,
     redirect: process.env.VUE_APP_DEFAULT_APP, // 默认加载的路由
-    meta: { isTabs: false, isSide: false, isMain: true },
     children: [
       {
         path: "/home",
         name: "Home",
         component: Home,
-        meta: { isTabs: false, isSide: false, isMain: true },
+        meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       },
     ],
   },
@@ -60,10 +59,13 @@ const resetRouter = () => {
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
+  // 菜单当前选中及页面持久
+  if (to.path !== "/login") {
+    store.commit("permission/UPDATE_CURRENT_MODULE_NAME", to.meta.moduleName);
+    store.commit("permission/UPDATE_CURRENT_PAGE", to.path);
+  }
+  // 首页的时候组装左侧导航数据
   if (to.path === "/home") {
-    sessionStorage.removeItem("currentMenu");
-    sessionStorage.removeItem("currentPage");
-    store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "home");
     store.commit("permission/UPDATE_SUB_MENU", true);
   }
   if (!router.options.isAddAsyncMenuData) {

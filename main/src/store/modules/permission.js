@@ -12,6 +12,7 @@ const permission = {
   }),
   mutations: {
     UPDATE_CURRENT_MODULE_NAME(state, payload) {
+      sessionStorage.setItem("currentApp", payload);
       state.currentModuleName = payload;
     },
     UPDATE_CURRENT_PAGE(state, payload) {
@@ -27,7 +28,7 @@ const permission = {
         title: "首页",
         moduleName: "Home",
         path: "/home",
-        meta: { isTabs: false, isSide: false, isMain: true },
+        meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       };
       if (typeof payload === "boolean") {
         state.subMenu.push(homeMenuData);
