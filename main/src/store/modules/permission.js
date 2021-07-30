@@ -1,7 +1,6 @@
 import http from "@/utils/axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
-import { qiankunActions } from "../../main";
 const permission = {
   namespaced: true,
   state: () => ({
@@ -61,7 +60,6 @@ const permission = {
             component: () => import("@/views/404.vue"),
           });
           commit("UPDATE_ROUTERS", routes);
-          qiankunActions.setGlobalState({ routers: routes });
           resolve(routes);
         });
       });

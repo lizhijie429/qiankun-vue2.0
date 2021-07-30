@@ -30,6 +30,7 @@ router.beforeEach((to, from, next) => {
     router.options.isAddAsyncMenuData = true;
     next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
   } else {
+    router.options.isAddAsyncMenuData = true;
     next();
   }
 });

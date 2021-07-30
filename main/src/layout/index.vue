@@ -32,11 +32,17 @@ export default {
   },
   watch: {
     $route(to) {
-      this.$store.commit("UPDATE_CURRENT_PAGE", to.path);
+      this.$store.commit("permission/UPDATE_CURRENT_PAGE", to.path);
       sessionStorage.setItem("currentPage", to.path);
     },
   },
   mounted() {
+    // 初始化全局下发的数据
+    this.$actions.setGlobalState({
+      userInfo: this.$store.state.user.userInfo,
+      globalConfig: this.$store.state.user.globalConfig,
+      routers: this.$store.state.permission.routers,
+    });
     const homeMenuData = {
       title: "首页",
       moduleName: "Home",
@@ -62,11 +68,9 @@ export default {
   },
   methods: {
     filterMenuList(valuse) {
-      const _this = this;
       if (valuse && valuse.moduleName) {
         this.menuList.forEach((element) => {
           if (element.moduleName === valuse.moduleName) {
-            this.$actions.setGlobalState({ routers: _this.menus });
             this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", valuse.moduleName);
             this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
             this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
@@ -78,7 +82,6 @@ export default {
             const item = element.menuList[i];
             if (item.path === valuse.path) {
               this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", element.moduleName);
-              this.$actions.setGlobalState({ routers: _this.menus });
               this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
               this.$store.commit("tabs/UPDATE_TABS_LIST", item);
             }

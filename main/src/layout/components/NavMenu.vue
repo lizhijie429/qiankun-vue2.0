@@ -77,11 +77,9 @@ export default {
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
     },
     filterMenuList(valuse) {
-      let _this = this;
       if (valuse) {
         this.menuList.forEach((element) => {
           if (element.moduleName === valuse) {
-            this.$actions.setGlobalState({ routers: _this.menus });
             this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
             this.$store.commit("tabs/UPDATE_TABS_LIST", element.menuList[0]);
           }

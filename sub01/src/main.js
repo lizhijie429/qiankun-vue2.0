@@ -5,26 +5,22 @@ import router from "./router";
 import store from "./store";
 import common from "qiankun-vue2-common";
 
-Vue.config.productionTip = false;
-
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import validator from "validator";
 Vue.prototype.$validator = validator;
 
+Vue.config.productionTip = false;
 let instance = null;
 function render(props = {}) {
   const { container } = props;
-  let globalConfig = props.getGlobalState("globalConfig");
-  Vue.use(ElementUI, { size: globalConfig.formSize || "small" });
+  Vue.use(ElementUI, { size: "small" });
   instance = new Vue({
     router,
     store,
     render: (h) => h(App),
   }).$mount(container ? container.querySelector("#app") : "#app");
 }
-
-console.log(router);
 
 // 独立运行时
 if (!window.__POWERED_BY_QIANKUN__) {
@@ -33,7 +29,6 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
 export async function bootstrap(props) {
   console.log("[vue] vue app bootstraped", props);
-  common.setCommonData(props);
 }
 export async function mount(props) {
   console.log("[vue] props from main framework", props);

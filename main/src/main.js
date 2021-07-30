@@ -50,7 +50,7 @@ qiankunActions.onGlobalStateChange((state) => {
         store.commit("user/UPDATE_GLOBAL_CONFIG", element);
       }
       if (key === "routers") {
-        store.commit("permission/UPDATE_SUB_MENU", element);
+        store.commit("permission/UPDATE_ROUTERS", element);
       }
     }
   }

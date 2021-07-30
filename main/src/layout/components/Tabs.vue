@@ -29,8 +29,7 @@ export default {
       if (valuse) {
         this.menus.forEach((element) => {
           if (element.moduleName === valuse) {
-            this.$actions.setGlobalState({ routers: element.menuList });
-            this.$store.commit("UPDATE_SUB_MENU", element.menuList);
+            this.$store.commit("permission/UPDATE_SUB_MENU", element.menuList);
           }
         });
       }
@@ -50,9 +49,9 @@ export default {
       if (this.currentPage === item.path) {
         return false;
       } else {
-        this.$store.commit("UPDATE_CURRENT_PAGE", item.path);
+        this.$store.commit("permission/UPDATE_CURRENT_PAGE", item.path);
         this.filterMenus(item.moduleName);
-        this.$store.commit("UPDATE_CURRENT_MODULE_NAME", item.moduleName);
+        this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.moduleName);
 
         this.$router.push({ path: item.path });
       }
@@ -64,10 +63,10 @@ export default {
       let indexOf = this.getArrayIndex(this.tabsList, item.name);
       if (tabsListLength === indexOf) {
         // 删除最后一个
-        this.$store.dispatch("REMOVE_LAST_TAB", item);
+        this.$store.dispatch("tabs/REMOVE_LAST_TAB", item);
       } else {
         // 删除除了第一个跟最后一个
-        this.$store.dispatch("REMOVE_ANY_TAB", {
+        this.$store.dispatch("tabs/REMOVE_ANY_TAB", {
           indexOf,
           tabsItem: item,
         });

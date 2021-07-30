@@ -5,15 +5,7 @@
 </template>
 
 <script>
-export default {
-  // 初始化全局下发的数据
-  mounted() {
-    this.$actions.setGlobalState({
-      userInfo: this.$store.state.user.userInfo,
-      globalConfig: this.$store.state.user.globalConfig,
-    });
-  },
-};
+export default {};
 </script>
 
 <style lang="scss">
