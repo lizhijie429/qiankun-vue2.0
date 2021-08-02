@@ -62,6 +62,7 @@ export default {
       currentModuleName: (state) => state.permission.currentModuleName,
       userName: (state) => state.user.userInfo.name,
       menuList: (state) => state.permission.menuList,
+      tabsList: (state) => state.tabs.tabsList,
     }),
   },
   methods: {
@@ -73,6 +74,7 @@ export default {
         meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       };
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+      this.$actions.setGlobalState({ tabsList: this.tabsList });
       this.$router.push(`/home`);
     },
     handleSelect(item) {

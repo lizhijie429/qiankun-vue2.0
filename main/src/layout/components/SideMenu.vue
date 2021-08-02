@@ -29,11 +29,13 @@ export default {
     ...mapState({
       subMenu: (state) => state.permission.subMenu,
       currentPage: (state) => state.permission.currentPage,
+      tabsList: (state) => state.tabs.tabsList,
     }),
   },
   methods: {
     handleSelect(item) {
       this.$store.commit("tabs/UPDATE_TABS_LIST", item);
+      this.$actions.setGlobalState({ tabsList: this.tabsList });
       this.$router.push(item.path);
     },
     handleOpen(key, keyPath) {

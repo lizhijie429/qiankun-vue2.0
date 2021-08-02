@@ -2,6 +2,7 @@ const packageName = require("./package.json").name;
 const baseUrl = process.env.VUE_APP_BASE_URL;
 module.exports = {
   assetsDir: "./",
+  transpileDependencies: ["qiankun-vue2-common"],
   outputDir: `../dist/child/${packageName}`,
   publicPath: process.env.NODE_ENV === "production" ? baseUrl : "/",
   configureWebpack: {

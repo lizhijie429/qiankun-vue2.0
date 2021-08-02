@@ -7,11 +7,18 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "sub01Home",
   components: {},
+  computed: {
+    ...mapState("global", {
+      tabsList: (state) => state.tabsList,
+    }),
+  },
   methods: {
     gotoSub02() {
+      console.log("this.tabsList", this.$store.state);
       history.pushState(null, "sub02", "/sub02/about");
     },
     gotoLogin() {

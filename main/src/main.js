@@ -29,10 +29,12 @@ const initialState = {
   globalConfig: null,
   // 路由数据
   routers: null,
+  // tabs数据
+  tabsList: [],
 };
 
 // 初始化全局下发的数据
-export const qiankunActions = initGlobalState(initialState);
+const qiankunActions = initGlobalState(initialState);
 
 Vue.prototype.$actions = qiankunActions;
 
@@ -51,6 +53,9 @@ qiankunActions.onGlobalStateChange((state) => {
       }
       if (key === "routers") {
         store.commit("permission/UPDATE_ROUTERS", element);
+      }
+      if (key === "tabsList") {
+        store.commit("tabs/SET_TABS_LIST", element);
       }
     }
   }

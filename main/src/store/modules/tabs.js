@@ -5,6 +5,10 @@ const tabs = {
     tabsList: [],
   }),
   mutations: {
+    // 设置tabs数据
+    SET_TABS_LIST(state, payload) {
+      state.tabsList = payload;
+    },
     // 新增tabs
     UPDATE_TABS_LIST(state, payload) {
       if (state.tabsList.length < 10) {
@@ -57,6 +61,7 @@ const tabs = {
             }
           });
         }
+        this.$actions.setGlobalState({ tabsList: this.tabsList });
       }
     },
   },

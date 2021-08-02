@@ -28,6 +28,7 @@ export default {
   computed: {
     ...mapState({
       menuList: (state) => state.permission.menuList,
+      tabsList: (state) => state.tabs.tabsList,
     }),
   },
   mounted() {
@@ -50,6 +51,7 @@ export default {
     if (currentPage && currentPage === "/home" && currentApp && currentApp === "main") {
       this.$store.commit("permission/UPDATE_SUB_MENU", true);
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+      this.$actions.setGlobalState({ tabsList: this.tabsList });
       return false;
     }
     // 处理关闭前非首页页面持久化逻辑
@@ -68,6 +70,7 @@ export default {
       this.$store.commit("permission/UPDATE_SUB_MENU", true);
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
     }
+    this.$actions.setGlobalState({ tabsList: this.tabsList });
   },
 };
 </script>
