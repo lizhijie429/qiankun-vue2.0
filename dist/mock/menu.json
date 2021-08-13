@@ -1,0 +1,52 @@
+[
+  {
+    "moduleTitle": "子应用1",
+    "moduleName": "sub01",
+    "icon": "子应用1",
+    "menuList": [
+      {
+        "title": "应用跳转",
+        "moduleName": "sub01",
+        "name": "sub01home",
+        "path": "/sub01/home",
+        "component": "/home",
+        "icon": "home",
+        "meta": { "isTabs": true, "isSide": true }
+      },
+      {
+        "title": "数据修改",
+        "moduleName": "sub01",
+        "name": "sub01about",
+        "path": "/sub01/about",
+        "component": "/about",
+        "icon": "about",
+        "meta": { "isTabs": true, "isSide": true }
+      }
+    ]
+  },
+  {
+    "moduleTitle": "子应用2",
+    "moduleName": "sub02",
+    "icon": "子应用2",
+    "menuList": [
+      {
+        "title": "全局数据展示",
+        "moduleName": "sub02",
+        "name": "sub02home",
+        "path": "/sub02/home",
+        "component": "/home",
+        "icon": "home",
+        "meta": { "isTabs": true, "isSide": true }
+      },
+      {
+        "title": "页面展示",
+        "moduleName": "sub02",
+        "name": "sub02about",
+        "path": "/sub02/about",
+        "component": "/about",
+        "icon": "about",
+        "meta": { "isTabs": true, "isSide": true }
+      }
+    ]
+  }
+]

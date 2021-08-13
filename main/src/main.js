@@ -61,39 +61,60 @@ qiankunActions.onGlobalStateChange((state) => {
   }
 });
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount("#main");
+const microApps = [
+  {
+    name: "sub01", // 应用名称
+    entry: process.env.VUE_APP_CHILD_sub01,
+    activeRule: "/sub01",
+  },
+  {
+    name: "sub02",
+    entry: process.env.VUE_APP_CHILD_sub02,
+    activeRule: "/sub02",
+  },
+];
+
+const config = {
+  beforeLoad: [
+    (app) => {
+      console.log("%c before load", "background:#0f0 ; padding: 1px; border-radius: 3px;  color: #fff", app);
+    },
+  ], // 挂载前回调
+  beforeMount: [
+    (app) => {
+      console.log("%c before mount", "background:#f1f ; padding: 1px; border-radius: 3px;  color: #fff", app);
+    },
+  ], // 挂载后回调
+  afterUnmount: [
+    (app) => {
+      console.log("%c after unload", "background:#a7a ; padding: 1px; border-radius: 3px;  color: #fff", app);
+    },
+  ], // 卸载后回调
+};
+
+const apps = microApps.map((item) => {
+  return {
+    ...item,
+    container: "#subapp-viewport", // 子应用挂载的div
+    props: {
+      routerBase: item.activeRule, // 下发基础路由
+      globalState: initialState, // 下发全局数据方法
+    },
+  };
+});
 
 // 子应用注册
 export const registerApps = () => {
-  registerMicroApps([
-    {
-      name: "sub01", // 应用名称
-      entry: "//localhost:8010/sub01",
-      container: "#subapp-viewport",
-      activeRule: "/sub01",
-      props: {
-        routerBase: "/sub01", // 下发基础路由
-        globalState: initialState, // 下发全局数据方法
-      },
-    },
-    {
-      name: "sub02",
-      entry: "//localhost:8020/sub02",
-      container: "#subapp-viewport",
-      activeRule: "/sub02",
-      props: {
-        routerBase: "/sub02",
-        globalState: initialState,
-      },
-    },
-  ]);
+  registerMicroApps(apps, config);
   start({
     prefetch: "all", // 可选，是否开启预加载，默认为 true。
     sandbox: true, // 可选，是否开启沙箱，默认为 true。// 从而确保微应用的样式不会对全局造成影响。
     singular: true, // 可选，是否为单实例场景，单实例指的是同一时间只会渲染一个微应用。默认为 true。
   });
 };
+
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#main");

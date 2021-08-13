@@ -24,8 +24,7 @@
     "build": "npm-run-all build:* ",
     "build:main": "cd main && npm run build ",
     "build:sub01": "cd sub01 && npm run build ",
-    "build:sub02": "cd sub02 && npm run build ",
-    "build:copy": "node ./build/index.js"
+    "build:sub02": "cd sub02 && npm run build "
   },
   "repository": {
     "type": "git",
