@@ -2,7 +2,7 @@
  * @Author: lizhijie429
  * @Date: 2021-08-16 17:11:52
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-08-16 17:20:16
+ * @LastEditTime: 2021-08-16 17:28:20
  * @Description:
  */
 import { registerMicroApps, start } from "qiankun";
@@ -11,6 +11,7 @@ import { microApps, config } from "./registerApp";
 
 export { qiankunActions } from "./globalState";
 
+/* 封装全局下发的数据及挂载子应用的节点 */
 const apps = microApps.map((item) => {
   return {
     ...item,
@@ -22,7 +23,7 @@ const apps = microApps.map((item) => {
   };
 });
 
-// 子应用注册
+// 微应用注册
 export const registerApps = () => {
   registerMicroApps(apps, config);
   start({

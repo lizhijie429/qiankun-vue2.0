@@ -1,3 +1,4 @@
+/* 子应用列表 */
 export const microApps = [
   {
     name: "sub01", // 应用名称
@@ -11,6 +12,7 @@ export const microApps = [
   },
 ];
 
+/* qiankun全局声明周期钩子 */
 export const config = {
   beforeLoad: [
     (app) => {
