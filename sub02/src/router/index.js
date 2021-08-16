@@ -12,6 +12,8 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
 
+// const activePath = process.env.NODE_ENV === "development" ? `/${systemEnName}/` : `/udaam-ui/${systemEnName}/`;
+
 const router = new VueRouter({
   base: window.__POWERED_BY_QIANKUN__ ? `${process.env.VUE_APP_BASE_URL}` : "/",
   isAddAsyncMenuData: false,

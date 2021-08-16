@@ -36,8 +36,6 @@ const initialState = {
 // 初始化全局下发的数据
 const qiankunActions = initGlobalState(initialState);
 
-Vue.prototype.$actions = qiankunActions;
-
 // 检测全局下发数据的改变
 qiankunActions.onGlobalStateChange((state) => {
   // 修改全局下发的数据
@@ -61,7 +59,9 @@ qiankunActions.onGlobalStateChange((state) => {
   }
 });
 
-const microApps = [
+Vue.prototype.$actions = qiankunActions;
+
+export const microApps = [
   {
     name: "sub01", // 应用名称
     entry: process.env.VUE_APP_CHILD_sub01,
@@ -74,7 +74,7 @@ const microApps = [
   },
 ];
 
-const config = {
+export const config = {
   beforeLoad: [
     (app) => {
       console.log("%c before load", "background:#0f0 ; padding: 1px; border-radius: 3px;  color: #fff", app);
