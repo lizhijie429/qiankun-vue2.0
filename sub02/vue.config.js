@@ -1,10 +1,20 @@
+const path = require("path");
 const packageName = require("./package.json").name;
+const node_env = process.env.NODE_ENV === "production";
 // const baseUrl = process.env.VUE_APP_BASE_URL;
+const baseUrl = "/";
+const resolve = (dir) => path.join(__dirname, dir);
 module.exports = {
-  publicPath: process.env.NODE_ENV === "development" ? "/" : `/${process.env.BASE_URL}/`,
-  outputDir: `../dist/subapp/${packageName}`,
+  assetsDir: "static",
+  outputDir: `../dist/${packageName}`,
+  publicPath: node_env ? baseUrl : "/",
   transpileDependencies: ["qiankun-vue2-common"],
   configureWebpack: {
+    resolve: {
+      alias: {
+        "@": resolve("src"),
+      },
+    },
     output: {
       library: `${packageName}`,
       libraryTarget: "umd",
