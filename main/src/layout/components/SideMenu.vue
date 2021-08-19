@@ -1,8 +1,6 @@
 <template>
   <div class="side-bar">
-    <div class="logo">
-      <span class="site-name">ADMIN LITE</span>
-    </div>
+    <logo></logo>
     <el-menu
       class="side-menu"
       :default-active="currentPage"
@@ -18,13 +16,17 @@
           <span slot="title">{{ item.title }}</span>
         </el-menu-item>
       </template>
+      <qr-code></qr-code>
     </el-menu>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import Logo from "./Logo.vue";
+import QrCode from "./QrCode.vue";
 export default {
+  components: { Logo, QrCode },
   computed: {
     ...mapState({
       subMenu: (state) => state.permission.subMenu,
@@ -59,18 +61,5 @@ export default {
 .side-menu {
   width: 240px;
   height: calc(100% - 60px);
-}
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  line-height: 64px;
-  background: #002140;
-  color: #fff;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  overflow: hidden;
 }
 </style>

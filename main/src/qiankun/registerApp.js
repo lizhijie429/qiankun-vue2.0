@@ -14,9 +14,9 @@ const microApps = [
 ];
 
 /* 路由监听 */
-const genActiveRule = (routerPrefix) => {
-  return (location) => location.pathname.startsWith(routerPrefix);
-};
+// const genActiveRule = (routerPrefix) => {
+//   return (location) => location.pathname.startsWith(routerPrefix);
+// };
 
 /* 重构apps */
 export const filterApps = () => {
@@ -24,7 +24,7 @@ export const filterApps = () => {
     // 必选，微应用的容器节点的选择器或者 Element 实例。
     item.container = "#subapp-viewport";
     // 必选，微应用的激活规则。
-    item.activeRule = genActiveRule(`/${item.name}`);
+    item.activeRule = `/${item.name}`;
     // 可选，主应用需要传递给微应用的数据。
     item.props = {
       routerBase: item.activeRule, // 下发基础路由
