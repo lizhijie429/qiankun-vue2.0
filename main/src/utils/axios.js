@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const config = {
-  baseURL: process.env.VUE_APP_API_URL,
+import config from "@/config";
+
+const axiosConfig = {
+  baseURL: config.API_URL,
   timeout: 2500,
 };
 
-const http = axios.create(config);
+const http = axios.create(axiosConfig);
 http.defaults.headers.common["Authorization"] = "AUTH_TOKEN";
 http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
