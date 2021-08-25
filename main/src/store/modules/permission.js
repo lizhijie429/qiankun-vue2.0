@@ -1,4 +1,7 @@
+/* 网络请求 */
 // import http from "@/utils/axios";
+
+/* 这个是为了请求本地json文件-------临时使用 */
 import http from "axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
