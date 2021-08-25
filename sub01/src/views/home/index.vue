@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>sub01</h1>
+    <h1>应用跳转页面</h1>
     <el-button type="primary" @click="gotoLogin">跳转登录页</el-button>
     <el-button type="success" @click="gotoSub02">跳转sub02</el-button>
   </div>

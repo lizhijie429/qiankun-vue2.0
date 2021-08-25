@@ -4,18 +4,11 @@
     <el-menu
       class="side-menu"
       :default-active="currentPage"
-      @open="handleOpen"
-      @close="handleClose"
       background-color="#00142a"
       text-color="hsla(0, 0%, 100%, .65)"
       active-text-color="#409EFF"
     >
-      <template v-for="item in subMenu">
-        <el-menu-item v-if="item.name !== 'notfound'" :key="item.name" :index="item.path" @click="handleSelect(item)">
-          <i class="el-icon-menu"></i>
-          <span slot="title">{{ item.title }}</span>
-        </el-menu-item>
-      </template>
+      <sub-menu :subMenu="subMenu"></sub-menu>
       <qr-code></qr-code>
     </el-menu>
   </div>
@@ -25,8 +18,9 @@
 import { mapState } from "vuex";
 import Logo from "./Logo.vue";
 import QrCode from "./QrCode.vue";
+import SubMenu from "./SubMenu.vue";
 export default {
-  components: { Logo, QrCode },
+  components: { Logo, QrCode, SubMenu },
   computed: {
     ...mapState({
       subMenu: (state) => state.permission.subMenu,

@@ -5,21 +5,44 @@
     "icon": "子应用1",
     "menuList": [
       {
-        "title": "应用跳转",
+        "title": "应用管理",
         "moduleName": "sub01",
         "name": "sub01home",
         "path": "/sub01/home",
         "component": "/home",
         "icon": "home",
-        "meta": { "isTabs": true, "isSide": true }
+        "meta": { "isTabs": true, "isSide": true },
+        "children": [
+          {
+            "title": "应用跳转",
+            "moduleName": "sub01",
+            "name": "sub01home",
+            "path": "/sub01/home",
+            "component": "/home",
+            "children": [],
+            "icon": "home",
+            "meta": { "isTabs": true, "isSide": true }
+          },
+          {
+            "title": "数据修改",
+            "moduleName": "sub01",
+            "name": "sub01changeData",
+            "path": "/sub01/changeData",
+            "component": "/changeData",
+            "children": [],
+            "icon": "home",
+            "meta": { "isTabs": true, "isSide": true }
+          }
+        ]
       },
       {
-        "title": "数据修改",
+        "title": "关于子应用",
         "moduleName": "sub01",
         "name": "sub01about",
         "path": "/sub01/about",
         "component": "/about",
-        "icon": "about",
+        "children": [],
+        "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       }
     ]
@@ -35,6 +58,7 @@
         "name": "sub02home",
         "path": "/sub02/home",
         "component": "/home",
+        "children": [],
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       },
@@ -44,7 +68,8 @@
         "name": "sub02about",
         "path": "/sub02/about",
         "component": "/about",
-        "icon": "about",
+        "children": [],
+        "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       }
     ]

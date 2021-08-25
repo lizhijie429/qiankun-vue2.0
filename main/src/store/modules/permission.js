@@ -1,4 +1,5 @@
-import http from "@/utils/axios";
+// import http from "@/utils/axios";
+import http from "axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
 const permission = {
@@ -46,8 +47,10 @@ const permission = {
     generateRoutes({ commit }) {
       return new Promise((resolve) => {
         // 向后端请求路由数据
-        http.get("/menus").then((res) => {
-          const data = res.data.data.list;
+        http.get("http://localhost:8080/mock/menu.json").then((res) => {
+          console.log("data", res.data);
+          const data = res.data;
+          // const data = res.data.data.list;
           commit("UPDATE_MENU_LIST", data);
           let routes = [];
           for (let i = 0; i < data.length; i++) {
@@ -74,15 +77,19 @@ function getMenuItem(menus) {
   let routers = [];
   for (let index = 0; index < menus.length; index++) {
     const menu = menus[index];
-    const route = {
-      path: menu.path,
-      component: Layout,
-      name: menu.name,
-      meta: menu.meta,
-    };
-    route.meta.title = menu.title;
-    route.meta.moduleName = menu.moduleName;
-    routers.push(route);
+    if (menu.children && menu.children.length > 0) {
+      routers = [...routers, ...getMenuItem(menu.children)];
+    } else {
+      const route = {
+        path: menu.path,
+        component: Layout,
+        name: menu.name,
+        meta: menu.meta,
+      };
+      route.meta.title = menu.title;
+      route.meta.moduleName = menu.moduleName;
+      routers.push(route);
+    }
   }
   return routers;
 }
