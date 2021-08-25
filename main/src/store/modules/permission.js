@@ -51,7 +51,6 @@ const permission = {
       return new Promise((resolve) => {
         // 向后端请求路由数据
         http.get("http://localhost:8080/mock/menu.json").then((res) => {
-          console.log("data", res.data);
           const data = res.data;
           // const data = res.data.data.list;
           commit("UPDATE_MENU_LIST", data);
