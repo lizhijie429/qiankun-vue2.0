@@ -1,4 +1,8 @@
-import http from "@/utils/axios";
+/* 网络请求 */
+// import http from "@/utils/axios";
+
+/* 这个是为了请求本地json文件-------临时使用 */
+import http from "axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
 const permission = {
@@ -74,15 +78,19 @@ function getMenuItem(menus) {
   let routers = [];
   for (let index = 0; index < menus.length; index++) {
     const menu = menus[index];
-    const route = {
-      path: menu.path,
-      component: Layout,
-      name: menu.name,
-      meta: menu.meta,
-    };
-    route.meta.title = menu.title;
-    route.meta.moduleName = menu.moduleName;
-    routers.push(route);
+    if (menu.children && menu.children.length > 0) {
+      routers = [...routers, ...getMenuItem(menu.children)];
+    } else {
+      const route = {
+        path: menu.path,
+        component: Layout,
+        name: menu.name,
+        meta: menu.meta,
+      };
+      route.meta.title = menu.title;
+      route.meta.moduleName = menu.moduleName;
+      routers.push(route);
+    }
   }
   return routers;
 }

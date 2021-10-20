@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>关于子应用页面</h1>
+    <h1>修改全局数据页面</h1>
     <el-button type="primary" @click="update">更新姓名</el-button>
   </div>
 </template>
