@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <h1>主应用首页</h1>
+    <div>
+      <div><b> sub01（子应用1） </b>及<b> sub02（子应用2） </b>为 <span style="color: red">Vue应用</span></div>
+      <div style="padding-top: 20px"><b> sub03（子应用3） </b>为<span style="color: red">React应用</span></div>
+    </div>
     <h4>希望你可以帮我点个 ⭐ ，这将对我是极大的鼓励。</h4>
     <div>
       如有问题，请使用
