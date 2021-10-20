@@ -2,7 +2,7 @@
  * @Author: lizhijie429
  * @Date: 2021-08-25 20:56:20
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-08-25 21:05:45
+ * @LastEditTime: 2021-10-20 18:12:15
  * @Description: 
 -->
 <template>
@@ -10,8 +10,8 @@
     <template v-for="item in subMenu">
       <el-submenu
         v-if="item.children && item.children.length > 0 && item.name !== 'notfound'"
-        :key="item.name"
         :index="item.path"
+        :key="item.name"
       >
         <template slot="title">
           <i class="el-icon-menu"></i>
@@ -21,7 +21,7 @@
       </el-submenu>
       <el-menu-item
         v-else-if="item.name !== 'notfound'"
-        :key="item.name"
+        :key="item.path"
         :index="item.path"
         @click="handleSelect(item)"
       >
