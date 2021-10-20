@@ -46,8 +46,8 @@ const permission = {
     generateRoutes({ commit }) {
       return new Promise((resolve) => {
         // 向后端请求路由数据
-        http.get("/menus").then((res) => {
-          const data = res.data.data.list;
+        http.get("/mock/menu.json").then((res) => {
+          const data = res.data;
           commit("UPDATE_MENU_LIST", data);
           let routes = [];
           for (let i = 0; i < data.length; i++) {

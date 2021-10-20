@@ -48,5 +48,30 @@
         "meta": { "isTabs": true, "isSide": true }
       }
     ]
+  },
+  {
+    "moduleTitle": "子应用3",
+    "moduleName": "sub03",
+    "icon": "子应用3",
+    "menuList": [
+      {
+        "title": "React中的全局数据",
+        "moduleName": "sub03",
+        "name": "sub03home",
+        "path": "/sub03/home",
+        "component": "/home",
+        "icon": "home",
+        "meta": { "isTabs": true, "isSide": true }
+      },
+      {
+        "title": "路由跳转",
+        "moduleName": "sub03",
+        "name": "sub03about",
+        "path": "/sub03/about",
+        "component": "/about",
+        "icon": "about",
+        "meta": { "isTabs": true, "isSide": true }
+      }
+    ]
   }
 ]

@@ -2,7 +2,7 @@ import { initialState } from "./globalState";
 
 import config from "@/config";
 
-const { SUB01_MICRO_APP, SUB02_MICRO_APP } = config;
+const { SUB01_MICRO_APP, SUB02_MICRO_APP, SUB03_MICRO_APP } = config;
 
 const microApps = [
   /**
@@ -20,6 +20,11 @@ const microApps = [
     name: "sub02",
     entry: SUB02_MICRO_APP,
     activeRule: "/sub02",
+  },
+  {
+    name: "sub03",
+    entry: SUB03_MICRO_APP,
+    activeRule: "/sub03",
   },
 ];
 
