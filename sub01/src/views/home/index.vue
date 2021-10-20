@@ -10,6 +10,14 @@
 import { mapState } from "vuex";
 export default {
   name: "sub01Home",
+  data() {
+    return {
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
+    };
+  },
   components: {},
   computed: {
     ...mapState("global", {
@@ -18,7 +26,6 @@ export default {
   },
   methods: {
     gotoSub02() {
-      console.log("this.tabsList", this.$store.state);
       history.pushState(null, "sub02", "/sub02/about");
     },
     gotoLogin() {
