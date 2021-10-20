@@ -45,6 +45,7 @@ export default {
     const homeMenuData = {
       title: "首页",
       moduleName: "Home",
+      name: "home",
       path: "/home",
       meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
     };

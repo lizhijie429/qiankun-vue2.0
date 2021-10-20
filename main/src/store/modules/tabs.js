@@ -13,7 +13,7 @@ const tabs = {
     UPDATE_TABS_LIST(state, payload) {
       if (state.tabsList.length < 10) {
         const hasTabsItem = state.tabsList.filter((item) => {
-          return item.name === payload.name;
+          return item && item.name === payload.name;
         });
         if (!hasTabsItem.length) {
           state.tabsList.push(payload);
