@@ -75,7 +75,7 @@ npm install -g serve
 serve -s dist
 ```
 
-浏览器打开网址：http://localhost:5000 即可预览。
+浏览器打开网址：<http://localhost:5000> 即可预览。
 
 ## 支持
 
