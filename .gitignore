@@ -80,3 +80,5 @@ typings/
 .dynamodb/
 
 common
+
+package-lock.json
