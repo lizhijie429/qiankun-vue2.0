@@ -2,7 +2,10 @@ import "./public-path";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import App from "./views/App/index.jsx";
+import { App } from "./views/App/index.jsx";
+
+import store from "./store/index";
+import { Provider } from "react-redux";
 
 import zhCN from "antd/lib/locale/zh_CN";
 import { ConfigProvider } from "antd";
@@ -14,7 +17,9 @@ function render(props) {
   ReactDOM.render(
     <BrowserRouter basename={window.__POWERED_BY_QIANKUN__ ? "/sub03" : "/"}>
       <ConfigProvider locale={zhCN}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ConfigProvider>
     </BrowserRouter>,
     container ? container.querySelector("#root") : document.querySelector("#root")
@@ -23,12 +28,7 @@ function render(props) {
 
 function storeTest(props) {
   props.onGlobalStateChange((value, prev) => console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev), true);
-  props.setGlobalState({
-    ignore: props.name,
-    user: {
-      name: props.name,
-    },
-  });
+  // props.setGlobalState({});
 }
 
 if (!window.__POWERED_BY_QIANKUN__) {
