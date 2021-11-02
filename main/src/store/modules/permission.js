@@ -1,36 +1,40 @@
 /* 网络请求 */
 // import http from "@/utils/axios";
-
 /* 这个是为了请求本地json文件-------临时使用 */
 import http from "axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
+
 const permission = {
   namespaced: true,
   state: () => ({
     routers: null,
     menuList: [],
     subMenu: [],
-    currentModuleName: "home",
+    currentmoduleName: "main",
     currentPage: null,
   }),
   mutations: {
+    // 当前模块
     UPDATE_CURRENT_MODULE_NAME(state, payload) {
       sessionStorage.setItem("currentApp", payload);
       state.currentModuleName = payload;
     },
+    // 当前页面
     UPDATE_CURRENT_PAGE(state, payload) {
       sessionStorage.setItem("currentPage", payload);
       state.currentPage = payload;
     },
+    // 菜单数据
     UPDATE_MENU_LIST(state, payload) {
       state.menuList = payload;
     },
+    // 左侧菜单数据，子应用菜单数据
     UPDATE_SUB_MENU(state, payload) {
       state.subMenu = [];
       const homeMenuData = {
         title: "首页",
-        moduleName: "Home",
+        moduleName: "main",
         path: "/home",
         meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       };
@@ -42,6 +46,7 @@ const permission = {
         state.subMenu = payload;
       }
     },
+    // 路由数据
     UPDATE_ROUTERS(state, payload) {
       state.routers = constantRoutes.concat(payload);
     },

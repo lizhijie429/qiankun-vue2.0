@@ -2,7 +2,7 @@
   <div class="home">
     <h1>应用跳转页面</h1>
     <el-button type="primary" @click="gotoLogin">跳转登录页</el-button>
-    <el-button type="success" @click="gotoSub02">跳转sub02</el-button>
+    <el-button type="success" @click="jumpPage('/sub02/about', 'sub02')">跳转sub02</el-button>
   </div>
 </template>
 
@@ -25,9 +25,6 @@ export default {
     }),
   },
   methods: {
-    gotoSub02() {
-      history.pushState(null, "sub02", "/sub02/about");
-    },
     gotoLogin() {
       history.pushState(null, "", "/login");
     },

@@ -2,12 +2,13 @@
  * @Author: lizhijie429
  * @Date: 2021-08-16 17:09:09
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-08-16 17:21:54
+ * @LastEditTime: 2021-11-02 18:41:31
  * @Description:
  */
 
 import store from "../store/index";
 import { initGlobalState } from "qiankun";
+import { findCurrentPage } from "../utils";
 
 // 定义全局下发的数据
 export const initialState = {
@@ -19,6 +20,11 @@ export const initialState = {
   routers: null,
   // tabs数据
   tabsList: [],
+  // 监控子应用跳转子应用
+  currentPage: {
+    pagePath: "",
+    moduleName: "",
+  },
 };
 
 // 初始化全局下发的数据
@@ -42,6 +48,22 @@ qiankunActions.onGlobalStateChange((state) => {
       }
       if (key === "tabsList") {
         store.commit("tabs/SET_TABS_LIST", element);
+      }
+      if (key === "currentPage") {
+        const menuList = store.state.permission.menuList;
+        const menu = menuList.filter((item) => {
+          return item.moduleName === element.moduleName;
+        });
+        if (menu.length) {
+          store.commit("permission/UPDATE_SUB_MENU", menu[0].menuList);
+          // 跳转页面
+          const page1 = findCurrentPage(menu[0].menuList, element.pagePath);
+          console.log("+++++++++++++++", page1);
+          const page = menu[0].menuList.filter((item) => {
+            return item.path === element.pagePath;
+          });
+          store.commit("tabs/UPDATE_TABS_LIST", page[0]);
+        }
       }
     }
   }

@@ -10,11 +10,29 @@ import "element-ui/lib/theme-chalk/index.css";
 import validator from "validator";
 Vue.prototype.$validator = validator;
 
+Vue.mixin({
+  methods: {
+    jumpPage(path, moduleName) {
+      // 通过主应用进行路由跳转
+      this.$setGlobalState({
+        currentPage: {
+          pagePath: path,
+          moduleName,
+        },
+      });
+      // 修改持久化数据
+      sessionStorage.setItem("currentApp", moduleName);
+      sessionStorage.setItem("currentPage", path);
+    },
+  },
+});
+
 Vue.config.productionTip = false;
 let instance = null;
 function render(props = {}) {
   const { container } = props;
   Vue.use(ElementUI, { size: "small" });
+  Vue.prototype.$setGlobalState = props.setGlobalState;
   instance = new Vue({
     router,
     store,

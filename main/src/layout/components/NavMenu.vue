@@ -69,12 +69,18 @@ export default {
     toHome() {
       const homeMenuData = {
         title: "首页",
-        moduleName: "Home",
+        moduleName: "main",
         path: "/home",
         meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
       };
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
       this.$actions.setGlobalState({ tabsList: this.tabsList });
+      this.$actions.setGlobalState({
+        currentPage: {
+          pagePath: "/home",
+          moduleName: "main",
+        },
+      });
       this.$router.push(`/home`);
     },
     handleSelect(item) {

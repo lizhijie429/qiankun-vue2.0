@@ -7,9 +7,9 @@
       {
         "title": "应用管理",
         "moduleName": "sub01",
-        "name": "sub01home",
-        "path": "/sub01/home",
-        "component": "/home",
+        "name": "sub01",
+        "path": "/sub01",
+        "component": null,
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true },
         "children": [
