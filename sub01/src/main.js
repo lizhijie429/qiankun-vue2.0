@@ -13,12 +13,10 @@ Vue.prototype.$validator = validator;
 Vue.mixin({
   methods: {
     jumpPage(path, moduleName) {
-      // 通过主应用进行路由跳转
-      this.$setGlobalState({ currentPage: path });
-      this.$setGlobalState({ currentModuleName: moduleName });
-      // 修改持久化数据
-      sessionStorage.setItem("currentApp", moduleName);
-      sessionStorage.setItem("currentPage", path);
+      // 通知主应用发生了页面跳转
+      this.$setGlobalState({
+        currentRoute: { currentPage: path, currentModuleName: moduleName },
+      });
     },
   },
 });

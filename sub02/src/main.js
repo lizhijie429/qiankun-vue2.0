@@ -10,11 +10,23 @@ import "element-ui/lib/theme-chalk/index.css";
 import validator from "validator";
 Vue.prototype.$validator = validator;
 
+Vue.mixin({
+  methods: {
+    jumpPage(path, moduleName) {
+      // 通知主应用发生了页面跳转
+      this.$setGlobalState({
+        currentRoute: { currentPage: path, currentModuleName: moduleName },
+      });
+    },
+  },
+});
+
 Vue.config.productionTip = false;
 let instance = null;
 function render(props = {}) {
   const { container } = props;
   Vue.use(ElementUI, { size: "small" });
+  Vue.prototype.$setGlobalState = props.setGlobalState;
   instance = new Vue({
     router,
     store,
