@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <h1>应用跳转页面</h1>
-    <el-button type="primary" @click="gotoLogin">跳转登录页</el-button>
+    <el-button type="primary" @click="jumpPage('/login', 'main')">跳转登录页</el-button>
+    <el-button type="primary" @click="jumpPage('/home', 'main')">跳转首页</el-button>
     <el-button type="success" @click="jumpPage('/sub02/about', 'sub02')">跳转sub02</el-button>
   </div>
 </template>
@@ -24,10 +25,6 @@ export default {
       tabsList: (state) => state.tabsList,
     }),
   },
-  methods: {
-    gotoLogin() {
-      history.pushState(null, "", "/login");
-    },
-  },
+  methods: {},
 };
 </script>

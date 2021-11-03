@@ -1,3 +1,10 @@
+export const homeMenuData = {
+  title: "首页",
+  moduleName: "main",
+  name: "home",
+  path: "/home",
+  meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
+};
 // 查找数组末级节点
 export const getLastLevelNode = (list) => {
   let result = [];

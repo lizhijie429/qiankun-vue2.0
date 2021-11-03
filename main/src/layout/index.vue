@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { getLastLevelNode } from "../utils";
+import { getLastLevelNode, homeMenuData } from "../utils";
 import { SideMenu, NavMenu, Tabs } from "./components/index";
 export default {
   name: "Layout",
@@ -43,21 +43,15 @@ export default {
     const currentPage = sessionStorage.getItem("currentPage");
     const currentApp = sessionStorage.getItem("currentApp");
     // 处理关闭前页面是首页的情况
-    const homeMenuData = {
-      title: "首页",
-      moduleName: "main",
-      name: "home",
-      path: "/home",
-      meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
-    };
-    if (currentPage && currentPage === "/home" && currentApp && currentApp === "main") {
+    if (currentApp && currentApp === "main" && currentPage && currentPage === "/home") {
       this.$store.commit("permission/UPDATE_SUB_MENU", true);
+      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "main");
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
       this.$actions.setGlobalState({ tabsList: this.tabsList });
       return false;
     }
     // 处理关闭前非首页页面持久化逻辑
-    if (currentPage && currentApp) {
+    if (currentPage && currentApp && currentApp !== "main") {
       // 获取左侧菜单数据
       const menu = this.menuList.filter((element) => {
         return element.moduleName === currentApp;

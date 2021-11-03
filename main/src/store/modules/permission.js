@@ -4,6 +4,7 @@
 import http from "axios";
 import { constantRoutes } from "@/router";
 import Layout from "@/views/Layout";
+import { homeMenuData } from "../../utils";
 
 const permission = {
   namespaced: true,
@@ -12,7 +13,7 @@ const permission = {
     menuList: [],
     subMenu: [],
     currentModuleName: "main",
-    currentPage: null,
+    currentPage: "/home",
   }),
   mutations: {
     // 当前模块
@@ -32,12 +33,6 @@ const permission = {
     // 左侧菜单数据，子应用菜单数据
     UPDATE_SUB_MENU(state, payload) {
       state.subMenu = [];
-      const homeMenuData = {
-        title: "首页",
-        moduleName: "main",
-        path: "/home",
-        meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
-      };
       if (typeof payload === "boolean") {
         state.subMenu.push(homeMenuData);
         return;

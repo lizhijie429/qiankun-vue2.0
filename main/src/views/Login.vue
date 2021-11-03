@@ -16,7 +16,9 @@ export default {
   methods: {
     // 跳转首页
     toHome() {
-      this.$router.push(process.env.VUE_APP_DEFAULT_APP);
+      this.$router.push("/home");
+      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "main");
+      this.$store.commit("permission/UPDATE_CURRENT_PAGE", "/home");
     },
   },
 };

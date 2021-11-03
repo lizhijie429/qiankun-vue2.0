@@ -2,13 +2,14 @@
  * @Author: lizhijie429
  * @Date: 2021-08-16 17:09:09
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-11-03 15:14:13
+ * @LastEditTime: 2021-11-03 20:14:44
  * @Description:
  */
 
 import store from "../store/index";
+import router from "../router/index";
 import { initGlobalState } from "qiankun";
-import { getLastLevelNode } from "../utils";
+import { getLastLevelNode, homeMenuData } from "../utils";
 
 // 定义全局下发的数据
 export const initialState = {
@@ -52,22 +53,32 @@ qiankunActions.onGlobalStateChange((state) => {
         store.commit("tabs/SET_TABS_LIST", item);
       }
       if (key === "currentRoute" && item.currentModuleName && item.currentPage) {
-        const menuList = store.state.permission.menuList;
-        // 获取左侧菜单数据
-        const subMenus = menuList.filter((element) => {
-          return element.moduleName === item.currentModuleName;
-        });
-        store.commit("permission/UPDATE_SUB_MENU", subMenus[0].menuList);
-        store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.currentModuleName);
-        store.commit("permission/UPDATE_CURRENT_PAGE", item.currentPage);
-        const pages = getLastLevelNode(subMenus[0].menuList);
-        if (Array.isArray(pages)) {
-          const page = pages.filter((element) => {
-            return element.path === item.currentPage;
+        if (item.currentModuleName === "main" && item.currentPage === "/login") {
+          router.push({ path: "/login" });
+        } else if (item.currentModuleName === "main" && item.currentPage === "/home") {
+          store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.currentModuleName);
+          store.commit("permission/UPDATE_CURRENT_PAGE", item.currentPage);
+
+          store.commit("permission/UPDATE_SUB_MENU", true);
+          store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+        } else {
+          const menuList = store.state.permission.menuList;
+          // 获取左侧菜单数据
+          const subMenus = menuList.filter((element) => {
+            return element.moduleName === item.currentModuleName;
           });
-          store.commit("tabs/UPDATE_TABS_LIST", page[0]);
+          store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.currentModuleName);
+          store.commit("permission/UPDATE_CURRENT_PAGE", item.currentPage);
+          store.commit("permission/UPDATE_SUB_MENU", subMenus[0].menuList);
+          const pages = getLastLevelNode(subMenus[0].menuList);
+          if (Array.isArray(pages)) {
+            const page = pages.filter((element) => {
+              return element.path === item.currentPage;
+            });
+            store.commit("tabs/UPDATE_TABS_LIST", page[0]);
+          }
+          console.log(item, subMenus);
         }
-        console.log(item, subMenus);
       }
     }
   }

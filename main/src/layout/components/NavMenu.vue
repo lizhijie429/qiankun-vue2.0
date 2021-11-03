@@ -50,6 +50,7 @@
 <script>
 import { mapState } from "vuex";
 import screenfull from "screenfull";
+import { homeMenuData } from "../../utils";
 export default {
   data() {
     return {
@@ -67,13 +68,8 @@ export default {
   },
   methods: {
     toHome() {
-      const homeMenuData = {
-        title: "首页",
-        moduleName: "main",
-        path: "/home",
-        meta: { isTabs: false, isSide: false, moduleName: "main", title: "首页" },
-      };
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+      this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "main");
       this.$actions.setGlobalState({ tabsList: this.tabsList });
       this.$router.push(`/home`);
     },
