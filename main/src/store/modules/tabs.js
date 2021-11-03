@@ -61,7 +61,6 @@ const tabs = {
             }
           });
         }
-        this.$actions.setGlobalState({ tabsList: this.tabsList });
       }
     },
   },
