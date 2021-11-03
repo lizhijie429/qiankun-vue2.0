@@ -11,7 +11,7 @@ const permission = {
     routers: null,
     menuList: [],
     subMenu: [],
-    currentmoduleName: "main",
+    currentModuleName: "main",
     currentPage: null,
   }),
   mutations: {

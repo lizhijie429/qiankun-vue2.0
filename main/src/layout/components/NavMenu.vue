@@ -75,12 +75,6 @@ export default {
       };
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
       this.$actions.setGlobalState({ tabsList: this.tabsList });
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: "/home",
-          moduleName: "main",
-        },
-      });
       this.$router.push(`/home`);
     },
     handleSelect(item) {

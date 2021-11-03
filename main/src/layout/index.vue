@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from "vuex";
-// import { findCurrentPage } from "../utils";
+import { getLastLevelNode } from "../utils";
 import { SideMenu, NavMenu, Tabs } from "./components/index";
 export default {
   name: "Layout",
@@ -54,48 +54,26 @@ export default {
       this.$store.commit("permission/UPDATE_SUB_MENU", true);
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
       this.$actions.setGlobalState({ tabsList: this.tabsList });
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: "/home",
-          moduleName: "main",
-        },
-      });
       return false;
     }
     // 处理关闭前非首页页面持久化逻辑
     if (currentPage && currentApp) {
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: currentPage,
-          moduleName: currentApp,
-        },
-      });
       // 获取左侧菜单数据
       const menu = this.menuList.filter((element) => {
         return element.moduleName === currentApp;
       });
       this.$store.commit("permission/UPDATE_SUB_MENU", menu[0].menuList);
       // 跳转页面
-      const page = menu[0].menuList.filter((element) => {
-        return element.path === currentPage;
-      });
-      // const page = findCurrentPage(menu[0].menuList, currentPage);
-      this.$store.commit("tabs/UPDATE_TABS_LIST", page[0]);
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: page[0].path,
-          moduleName: page[0].moduleName,
-        },
-      });
+      const pages = getLastLevelNode(menu[0].menuList);
+      if (Array.isArray(pages)) {
+        const page = pages.filter((element) => {
+          return element.path === currentPage;
+        });
+        this.$store.commit("tabs/UPDATE_TABS_LIST", page[0]);
+      }
     } else {
       this.$store.commit("permission/UPDATE_SUB_MENU", true);
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: "/home",
-          moduleName: "main",
-        },
-      });
     }
     this.$actions.setGlobalState({ tabsList: this.tabsList });
   },

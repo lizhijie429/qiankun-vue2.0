@@ -14,12 +14,8 @@ Vue.mixin({
   methods: {
     jumpPage(path, moduleName) {
       // 通过主应用进行路由跳转
-      this.$setGlobalState({
-        currentPage: {
-          pagePath: path,
-          moduleName,
-        },
-      });
+      this.$setGlobalState({ currentPage: path });
+      this.$setGlobalState({ currentModuleName: moduleName });
       // 修改持久化数据
       sessionStorage.setItem("currentApp", moduleName);
       sessionStorage.setItem("currentPage", path);

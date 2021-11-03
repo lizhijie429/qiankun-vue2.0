@@ -3,6 +3,7 @@
     "moduleTitle": "子应用1",
     "moduleName": "sub01",
     "icon": "子应用1",
+    "type": "module",
     "menuList": [
       {
         "title": "应用管理",
@@ -10,6 +11,7 @@
         "name": "sub01",
         "path": "/sub01",
         "component": null,
+        "type": "catalogue",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true },
         "children": [
@@ -20,6 +22,7 @@
             "path": "/sub01/home",
             "component": "/home",
             "children": [],
+            "type": "menu",
             "icon": "home",
             "meta": { "isTabs": true, "isSide": true }
           },
@@ -30,6 +33,7 @@
             "path": "/sub01/changeData",
             "component": "/changeData",
             "children": [],
+            "type": "menu",
             "icon": "home",
             "meta": { "isTabs": true, "isSide": true }
           }
@@ -42,6 +46,7 @@
         "path": "/sub01/about",
         "component": "/about",
         "children": [],
+        "type": "menu",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       }
@@ -51,6 +56,7 @@
     "moduleTitle": "子应用2",
     "moduleName": "sub02",
     "icon": "子应用2",
+    "type": "module",
     "menuList": [
       {
         "title": "全局数据展示",
@@ -59,6 +65,7 @@
         "path": "/sub02/home",
         "component": "/home",
         "children": [],
+        "type": "menu",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       },
@@ -69,6 +76,7 @@
         "path": "/sub02/about",
         "component": "/about",
         "children": [],
+        "type": "menu",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       }
@@ -78,6 +86,7 @@
     "moduleTitle": "子应用3",
     "moduleName": "sub03",
     "icon": "子应用3",
+    "type": "module",
     "menuList": [
       {
         "title": "React中的全局数据",
@@ -85,6 +94,8 @@
         "name": "sub03home",
         "path": "/sub03/home",
         "component": "/home",
+        "children": [],
+        "type": "menu",
         "icon": "home",
         "meta": { "isTabs": true, "isSide": true }
       },
@@ -94,6 +105,8 @@
         "name": "sub03about",
         "path": "/sub03/about",
         "component": "/about",
+        "children": [],
+        "type": "menu",
         "icon": "about",
         "meta": { "isTabs": true, "isSide": true }
       }

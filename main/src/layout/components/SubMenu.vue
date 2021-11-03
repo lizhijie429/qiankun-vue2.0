@@ -2,7 +2,7 @@
  * @Author: lizhijie429
  * @Date: 2021-08-25 20:56:20
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-11-02 17:24:43
+ * @LastEditTime: 2021-11-03 10:51:43
  * @Description: 
 -->
 <template>
@@ -53,12 +53,6 @@ export default {
       this.$store.commit("tabs/UPDATE_TABS_LIST", item);
       this.$actions.setGlobalState({
         tabsList: this.tabsList,
-      });
-      this.$actions.setGlobalState({
-        currentPage: {
-          pagePath: item.path,
-          moduleName: item.moduleName,
-        },
       });
       this.$router.push(item.path);
     },

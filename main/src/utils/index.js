@@ -1,15 +1,14 @@
-export const findCurrentPage = (list, key) => {
-  for (let i = 0; i < list.length; i++) {
-    const item = list[i];
-    console.log("item+++++++++++", item);
-    if (item.children && item.children.length > 0 && item.component === null) {
-      findCurrentPage(item.children, key);
+// 查找数组末级节点
+export const getLastLevelNode = (list) => {
+  let result = [];
+  if (!Array.isArray(list) || !list.length > 0) return false;
+  for (let index = 0; index < list.length; index++) {
+    const item = list[index];
+    if (item.children && item.children.length > 0) {
+      result = [...result, ...getLastLevelNode(item.children)];
     } else {
-      if (item.path === key) {
-        return item;
-      } else {
-        findCurrentPage(item.children, key);
-      }
+      result.push(item);
     }
   }
+  return result;
 };
