@@ -84,10 +84,10 @@ export default {
 .el-main::-webkit-scrollbar {
   display: none;
 }
-.el-main {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+// .el-main {
+//   -ms-overflow-style: none;
+//   scrollbar-width: none;
+// }
 .el-main {
   margin: 0 0.1rem 0.1rem;
   padding: 0.2rem;
