@@ -2,7 +2,7 @@
  * @Author: lizhijie429
  * @Date: 2021-08-16 17:09:09
  * @LastEditors: lizhijie429
- * @LastEditTime: 2021-11-03 20:14:44
+ * @LastEditTime: 2021-11-03 21:03:48
  * @Description:
  */
 
@@ -19,8 +19,6 @@ export const initialState = {
   globalConfig: null,
   // 路由数据
   routers: null,
-  // tabs数据
-  tabsList: [],
   // 实现子应用直接跳转子应用
   currentRoute: {
     // 当前页面
@@ -42,25 +40,26 @@ qiankunActions.onGlobalStateChange((state) => {
       initialState[key] = item;
       if (key === "userInfo") {
         store.commit("user/UPDATE_USER_INFO", item);
+        continue;
       }
       if (key === "globalConfig") {
         store.commit("user/UPDATE_GLOBAL_CONFIG", item);
+        continue;
       }
       if (key === "routers") {
         store.commit("permission/UPDATE_ROUTERS", item);
-      }
-      if (key === "tabsList") {
-        store.commit("tabs/SET_TABS_LIST", item);
+        continue;
       }
       if (key === "currentRoute" && item.currentModuleName && item.currentPage) {
         if (item.currentModuleName === "main" && item.currentPage === "/login") {
           router.push({ path: "/login" });
+          continue;
         } else if (item.currentModuleName === "main" && item.currentPage === "/home") {
           store.commit("permission/UPDATE_CURRENT_MODULE_NAME", item.currentModuleName);
           store.commit("permission/UPDATE_CURRENT_PAGE", item.currentPage);
-
           store.commit("permission/UPDATE_SUB_MENU", true);
           store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
+          continue;
         } else {
           const menuList = store.state.permission.menuList;
           // 获取左侧菜单数据
@@ -77,7 +76,7 @@ qiankunActions.onGlobalStateChange((state) => {
             });
             store.commit("tabs/UPDATE_TABS_LIST", page[0]);
           }
-          console.log(item, subMenus);
+          continue;
         }
       }
     }

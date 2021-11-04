@@ -70,7 +70,7 @@ export default {
     toHome() {
       this.$store.commit("tabs/UPDATE_TABS_LIST", homeMenuData);
       this.$store.commit("permission/UPDATE_CURRENT_MODULE_NAME", "main");
-      this.$actions.setGlobalState({ tabsList: this.tabsList });
+
       this.$router.push(`/home`);
     },
     handleSelect(item) {

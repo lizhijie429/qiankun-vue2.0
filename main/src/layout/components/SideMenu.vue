@@ -31,7 +31,7 @@ export default {
   methods: {
     handleSelect(item) {
       this.$store.commit("tabs/UPDATE_TABS_LIST", item);
-      this.$actions.setGlobalState({ tabsList: this.tabsList });
+
       this.$router.push(item.path);
     },
     handleOpen(key, keyPath) {
