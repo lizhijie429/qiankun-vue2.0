@@ -21,6 +21,13 @@ Vue.mixin({
   },
 });
 
+// 解决element-ui下拉框报错问题
+let rawGetComputedStyle = window.getComputedStyle;
+window.getComputedStyle = function (el, pseudoElt) {
+  if (el.nodeType == 11) return { 'overflow': 'auto' };
+  return rawGetComputedStyle(el, pseudoElt);
+}
+
 Vue.config.productionTip = false;
 let instance = null;
 function render(props = {}) {

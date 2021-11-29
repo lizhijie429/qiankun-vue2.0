@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>main登录页面</h1>
+    <div>main登录页面</div>
     <el-button type="primary" @click="toHome">登录</el-button>
   </div>
 </template>
