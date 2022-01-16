@@ -1,14 +1,24 @@
+<!--
+ * @Description: 
+ * @Author: lizhijie
+ * @Date: 2021-03-24 08:40:19
+ * @LastEditTime: 2021-12-25 10:02:14
+ * @LastEditors: lizhijie
+ * @Reference: 
+-->
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-</style>
+<script>
+export default {
+  mounted() {
+    let elements = document.querySelector(".app-view-box").childNodes;
+    let childrenNode = elements[0];
+    childrenNode.setAttribute("style", "height:100%");
+  },
+};
+</script>

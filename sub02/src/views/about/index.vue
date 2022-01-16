@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <h1>sub02</h1>
+    <h1 style="cursor: pointer" @click="numAdd">应用缓存测试:{{ num }}</h1>
     <h1>测试Vue的数据双向绑定的监听：{{ elementId.b }}</h1>
     <el-button type="primary" @click="openDialog(1)">打开1</el-button>
     <el-button type="primary" @click="openDialog(2)">打开2</el-button>
@@ -15,6 +16,7 @@ export default {
     return {
       eleKey: "",
       elementId: {},
+      num: 123,
     };
   },
   components: { SubDialog },
@@ -31,6 +33,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.subDialog.init(val);
       });
+    },
+    numAdd() {
+      this.num += this.num;
     },
   },
 };

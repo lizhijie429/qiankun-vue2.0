@@ -1,13 +1,19 @@
 <template>
   <layout>
-    <router-view v-if="isMain" class="height-abs"></router-view>
-    <div v-else id="subapp-viewport" class="app-view-box"></div>
+    <keep-alive>
+      <router-view v-if="isMain" class="height-abs"></router-view>
+      <template v-else>
+        <!-- <div id="subApp-viewport" class="app-view-box"></div> -->
+        <SubAppViewport></SubAppViewport>
+      </template>
+    </keep-alive>
   </layout>
 </template>
 
 <script>
 import Layout from "@/layout/index.vue";
 import { registerApps } from "@/qiankun/index";
+const SubAppViewport = { name: "SubAppViewport", template: `<div id="subApp-viewport" class="app-view-box"></div>` };
 export default {
   data() {
     return {
@@ -16,6 +22,7 @@ export default {
   },
   components: {
     Layout,
+    SubAppViewport,
   },
   watch: {
     $route(to) {

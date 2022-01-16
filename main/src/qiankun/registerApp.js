@@ -2,7 +2,7 @@ import { initialState } from "./globalState";
 
 import config from "@/config";
 
-const { SUB01_MICRO_APP, SUB02_MICRO_APP, SUB03_MICRO_APP } = config;
+const { Sub01MicroApp, Sub02MicroApp, Sub03MicroApp } = config;
 
 const microApps = [
   /**
@@ -13,17 +13,17 @@ const microApps = [
    */
   {
     name: "sub01",
-    entry: SUB01_MICRO_APP,
+    entry: Sub01MicroApp,
     activeRule: "/sub01",
   },
   {
     name: "sub02",
-    entry: SUB02_MICRO_APP,
+    entry: Sub02MicroApp,
     activeRule: "/sub02",
   },
   {
     name: "sub03",
-    entry: SUB03_MICRO_APP,
+    entry: Sub03MicroApp,
     activeRule: "/sub03",
   },
 ];
@@ -32,7 +32,7 @@ const microApps = [
 export const filterApps = () => {
   microApps.forEach((item) => {
     // 必选，微应用的容器节点的选择器或者 Element 实例。
-    item.container = "#subapp-viewport";
+    item.container = "#subApp-viewport";
     // 可选，主应用需要传递给微应用的数据。
     item.props = {
       routerBase: item.activeRule, // 下发基础路由

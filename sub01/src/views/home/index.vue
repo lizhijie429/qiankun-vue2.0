@@ -4,6 +4,7 @@
     <el-button type="primary" @click="jumpPage('/login', 'main')">跳转登录页</el-button>
     <el-button type="primary" @click="jumpPage('/home', 'main')">跳转首页</el-button>
     <el-button type="success" @click="jumpPage('/sub02/about', 'sub02')">跳转sub02</el-button>
+    <h1 style="cursor: pointer" @click="numAdd">应用缓存测试:{{ num }}</h1>
   </div>
 </template>
 
@@ -13,10 +14,7 @@ export default {
   name: "sub01Home",
   data() {
     return {
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      num: 123,
     };
   },
   components: {},
@@ -25,6 +23,10 @@ export default {
       tabsList: (state) => state.tabsList,
     }),
   },
-  methods: {},
+  methods: {
+    numAdd() {
+      this.num += this.num;
+    },
+  },
 };
 </script>

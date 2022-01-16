@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>sub02</h1>
+    <h1 style="cursor: pointer" @click="numAdd">应用缓存测试:{{ num }}</h1>
     <el-button type="primary" @click="update">修改用户名</el-button>
     <el-button type="primary" @click="jumpPage('/sub02/about', 'sub02')">子应用内的跳转</el-button>
     <div class="json-container-title">初始化后的this.$store.state的所有内容：</div>
@@ -15,6 +16,7 @@ export default {
   data() {
     return {
       jsonData: this.$store.state,
+      num: 123,
     };
   },
   components: {
@@ -31,6 +33,9 @@ export default {
     ...mapActions("global", ["setGlobalState"]),
     update() {
       this.setGlobalState({ userInfo: { name: "sub02的张三" } });
+    },
+    numAdd() {
+      this.num += this.num;
     },
   },
 };
