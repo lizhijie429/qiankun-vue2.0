@@ -4,7 +4,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import common from "qiankun-vue2-common";
-
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import validator from "validator";
