@@ -35,23 +35,25 @@
 
 2. 依赖安装
 
+   依赖安装采用pnpm，具体使用文档请查阅[pnpm官网](https://www.pnpm.cn)
+
    ```bash
    cd qiankun-vue2.0
-   npm install
+   pnpm install
    ```
 
 3. 项目启动
 
    ```bash
    cd qiankun-vue2.0
-   npm run start
+   pnpm run start
    ```
 
 4. 升级依赖 qiankun-vue2-common
 
    ```bash
    cd qiankun-vue2.0
-   npm run update
+   pnpm run update
    ```
 
 ## 编译部署
@@ -62,20 +64,10 @@
 
 ```bash
 cd qiankun-vue2.0
-npm run build
+pnpm run build
 ```
 
-本地部署测试（ Node.js 静态文件服务器——serve）
-
-```bash
-# 启动静态文件服务器
-npm install -g serve
-# -s 参数的意思是将其架设在 Single-Page Application 模式下
-# 这个模式会处理即将提到的路由问题
-serve -s dist
-```
-
-浏览器打开网址：<http://localhost:5000> 即可预览。
+本地部署测试（请使用nginx进行部署测试）
 
 ## 支持
 
