@@ -8,15 +8,18 @@
     </div>
     <h4>希望你可以帮我点个 ⭐ ，这将对我是极大的鼓励。</h4>
     <div>
-      如有问题，请使用
+      <h4 style="color: red">如有问题，请先查看文档排查，请先看文档排查，请先看文档排查。</h4>
+      <h4 style="color: red">如有还是问题，请百度，请百度，请百度。</h4>
+      实在是解决不了可在
       <a
         href="https://gitee.com/lizhijie429/qiankun-vue2.0/issues"
         target="_blank"
         rel="noopener noreferrer"
         style="color: #1a98f2"
-        >issues
+        >issues提问
       </a>
-      或 <strong>扫描左下方二维码</strong> 添加作者微信：lizhijie429
+      或者 <strong>扫描左下方二维码</strong> 添加作者微信（lizhijie429），拉你进该项目群。
+      <h4 style="color: red">重点说明：本人在微信上不做任何项目问题解答。</h4>
     </div>
   </div>
 </template>
